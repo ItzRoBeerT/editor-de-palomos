@@ -6,6 +6,7 @@ router.post('/pigeon/add', async (req, res) => {
 	const pigeon = new Pigeon(req.body);
 	try {
 		await pigeon.save();
+        
 		res.status(200).send({
 			message: 'Pigeon added!',
 			pigeon,

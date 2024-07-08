@@ -11,6 +11,10 @@ const pigeonSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 	},
+	birthday: {
+		type: Date,
+		default: Date.now,
+	},
 	feather: {
 		type: String,
 		required: true,
@@ -25,6 +29,11 @@ const pigeonSchema = new mongoose.Schema({
 		type: String,
 		required: false,
 		trim: true,
+	},
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'User',
 	},
 });
 
