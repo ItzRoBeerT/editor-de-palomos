@@ -1,0 +1,20 @@
+{
+	"name": "editor-palomo",
+	"version": "1.0.0",
+	"description": "Backend para el editor de palomos ",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/index.js",
+		"dev": "env-cmd -f ../.env.local nodemon src/index.js"
+	},
+	"author": "Roberto Caravaca",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"env-cmd": "^10.1.0",
+		"express": "^4.19.2",
+		"mongoose": "^8.4.5",
+		"nodemon": "^3.1.4"
+	}
+}
