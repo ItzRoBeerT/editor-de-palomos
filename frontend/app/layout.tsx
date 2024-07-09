@@ -1,22 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: "Palomar El Cata",
-    description: "Gestor de Palomos para El Palomar El Cata",
+	title: 'Inicio de sesión',
+	description: 'Inicia sesión para acceder a tu cuenta de editor y gestión de palomos',
 };
 
 export default function RootLayout({
-    children,
+	children,
 }: Readonly<{
-    children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-    return (
-        <html lang="es">
-            <body className={`${inter.className} bg-gray-900 text-white`}>{children}</body>
-        </html>
-    );
+	return (
+		<html lang="es">
+			<body className={`${inter.className} bg-gray-900 text-white`}>{children}</body>
+		</html>
+	);
 }
