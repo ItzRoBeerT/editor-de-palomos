@@ -50,11 +50,10 @@
     npm install
     ```
 
-4. Configura las variables de entorno en el archivo `.env` en el directorio `backend`:
+4. Configura las variables de entorno en el archivo `.env.local` en el directorio `editor-de-palomos`:
     ```env
     PORT=3000
-    MONGODB_URI=tu-mongodb-uri
-    SECRET_KEY=tu-clave-secreta
+    MONGODB_URL=tu-mongodb-uri
     ```
 
 5. Inicia el servidor backend:
