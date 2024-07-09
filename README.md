@@ -83,10 +83,6 @@
 4. Envía tus cambios (`git push origin feature/nueva-funcionalidad`).
 5. Abre un Pull Request.
 
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
 ## Contacto
 
 Si tienes alguna pregunta o sugerencia, no dudes en contactar a [ItzRobeerT](mailto:robertocaravaca436@gmail.com).
