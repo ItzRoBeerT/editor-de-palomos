@@ -5,9 +5,7 @@ import { useFormState } from 'react-dom';
 
 export default function AuthForm() {
 	const [state, formAction] = useFormState(login, { errors: {} });
-	
-	console.log({state});
-	
+		
 	return (
 		<Card>
 			<form className="max-w-sm mx-auto" action={formAction}>
