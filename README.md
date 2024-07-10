@@ -50,11 +50,10 @@
     npm install
     ```
 
-4. Configura las variables de entorno en el archivo `.env` en el directorio `backend`:
+4. Configura las variables de entorno en el archivo `.env.local` en el directorio `editor-de-palomos`:
     ```env
     PORT=3000
-    MONGODB_URI=tu-mongodb-uri
-    SECRET_KEY=tu-clave-secreta
+    MONGODB_URL=tu-mongodb-uri
     ```
 
 5. Inicia el servidor backend:
@@ -83,10 +82,6 @@
 3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva funcionalidad'`).
 4. Envía tus cambios (`git push origin feature/nueva-funcionalidad`).
 5. Abre un Pull Request.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ## Contacto
 
