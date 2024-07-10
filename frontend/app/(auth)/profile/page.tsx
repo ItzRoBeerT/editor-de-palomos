@@ -1,4 +1,10 @@
 import Card from '@/components/containers/card';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Palomar El Cata",
+    description: "Gestor de Palomos para El Palomar El Cata",
+};
 
 export default function ProfilePage() {
 	return (
