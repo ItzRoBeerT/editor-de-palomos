@@ -29,9 +29,7 @@ export default async function ProfilePage() {
 					<div className="grid grid-cols-12 gap-4">
 						<div className="col-span-12 sm:col-span-4">
 							<Card>
-								<Link href={'/profile/pigeons'}>
-								Palomos
-								</Link>
+								<Link href={'/profile/pigeons'}>Mis palomos</Link>
 							</Card>
 						</div>
 						<div className="col-span-12 sm:col-span-4">
@@ -39,10 +37,9 @@ export default async function ProfilePage() {
 								<p>Estadisticas</p>
 							</Card>
 						</div>
-
 						<div className="col-span-12 sm:col-span-4">
 							<Card>
-								<p>Logros</p>
+							<Link href={'/profile/pigeon-form'}>Agregar nuevo palomo</Link>
 							</Card>
 						</div>
 					</div>
