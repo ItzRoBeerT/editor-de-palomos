@@ -1,6 +1,13 @@
 export type User = {
-    name: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
+	name: string;
+	lastName: string;
+	email: string;
+	password: string;
+};
+
+export type Pigeon = {
+	name: string;
+	ring: string;
+	feather: string;
+	birthday: string;
+};
