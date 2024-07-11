@@ -1,10 +1,18 @@
 import Card from '@/components/containers/card';
-import { Metadata } from 'next';
+import { getUser } from '@/lib/user';
+import { cookies } from 'next/headers';
 
-export const metadata: Metadata = {
-    title: "Palomar El Cata",
-    description: "Gestor de Palomos para El Palomar El Cata",
-};
+export async function generateMetadata() {
+	const token = cookies().get('token')?.value || '';
+	const user = await getUser(token);
+
+	if (user) {
+		return {
+			title: `¡Bienvenido ${user.name}!`,
+			description: `Bienvenido a tu perfil ${user.name} ${user.lastName}`,
+		};
+	}
+}
 
 export default function ProfilePage() {
 	return (
