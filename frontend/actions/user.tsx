@@ -1,5 +1,5 @@
 'use server';
-import { cookies } from 'next/headers';
+import { loginUser } from '@/lib/user';
 import { redirect } from 'next/navigation';
 
 interface Errors {
@@ -23,25 +23,8 @@ export async function login(prevState: any, formData: FormData) {
 		return { errors };
 	}
 
-	const userCredentials = {
-		email,
-		password,
-	};
-
 	try {
-		const response = await fetch('http://localhost:4321/user/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(userCredentials),
-		});
-
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
-		const data = await response.json();
-		cookies().set('token', data.token);
+		await loginUser(email as string, password as string);
 	} catch (error) {
 		console.error('Error fetching data:', error);
 	}
