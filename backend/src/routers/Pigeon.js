@@ -12,7 +12,7 @@ router.post('/pigeon/add', async (req, res) => {
 			pigeon,
 		});
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		res.status(500).send({ error: error.message });
 	}
 });
 

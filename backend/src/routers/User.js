@@ -12,7 +12,7 @@ router.post('/user/createAccount', async (req, res) => {
 			user,
 		});
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		res.status(500).send({ error: error.message });
 	}
 });
 
@@ -22,7 +22,7 @@ router.post('/user/login', async (req, res) => {
 		const token = await user.generateAuthToken();
 		res.send({ user, token });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		res.status(500).send({ error: error.message });
 	}
 });
 
@@ -30,9 +30,22 @@ router.post('/user/logout', auth, async (req, res) => {
 	try {
 		req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token);
 		await req.user.save();
-		res.send('logged out')
+		res.send('logged out');
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.get('/user/me', auth, async (req, res) => {
+	try {
+		if (!req.user) {
+			return res
+				.status(404)
+				.send({ error: "The authenticated user's profile could not be found" });
+		}
+		res.send({ user: req.user });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
 	}
 });
 
