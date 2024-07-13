@@ -26,7 +26,7 @@ router.post('/pigeon/get', auth, async (req, res) => {
 	const ring = req.body.ring;
 
 	try {
-		const pigeon = await Pigeon.find({
+		const pigeon = await Pigeon.findOne({
 			ring: ring,
 		}).exec();
 		res.status(200).send({ pigeon });
