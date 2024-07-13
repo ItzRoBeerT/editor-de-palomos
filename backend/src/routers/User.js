@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const Pigeon = require('../models/Pigeon');
 const auth = require('../middleware/auth');
 const router = new express.Router();
 
@@ -44,6 +45,18 @@ router.get('/user/me', auth, async (req, res) => {
 				.send({ error: "The authenticated user's profile could not be found" });
 		}
 		res.send({ user: req.user });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.get('/user/getPigeons', auth, async (req, res) => {
+	try {
+		const userId = req.user._id;
+		const pigeons = await Pigeon.find({
+			userId: userId,
+		}).exec();
+		res.status(200).send({ pigeons });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}

@@ -22,13 +22,14 @@ router.post('/pigeon/add', auth, async (req, res) => {
 	}
 });
 
-router.get('/pigeon/get', auth, async (req, res) => {
+router.post('/pigeon/get', auth, async (req, res) => {
+	const ring = req.body.ring;
+
 	try {
-		const userId = req.user._id;
-		const pigeons = await Pigeon.find({
-			userId: userId,
+		const pigeon = await Pigeon.find({
+			ring: ring,
 		}).exec();
-		res.status(200).send({ pigeons });
+		res.status(200).send({ pigeon });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}

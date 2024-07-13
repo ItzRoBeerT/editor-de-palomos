@@ -1,4 +1,4 @@
-import { User } from '@/types/request';
+import { Pigeon, User } from '@/types/request';
 import { cookies } from 'next/headers';
 
 export async function loginUser(email: string, password: string) {
@@ -40,4 +40,23 @@ export async function getUser(token: string) {
 
 	if (!foundUser) throw new Error(`User not found!`);
 	return foundUser;
+}
+
+export async function getPigeons(token: string) {
+	const response = await fetch('http://localhost:4321/user/getPigeons', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	const data = await response.json();
+	const pigeons: Pigeon[] = data.pigeons;
+
+	return pigeons;
 }

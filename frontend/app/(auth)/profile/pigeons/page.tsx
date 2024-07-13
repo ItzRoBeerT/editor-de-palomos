@@ -1,7 +1,14 @@
 import Card from '@/components/containers/card';
 import SearchInput from '@/components/ui/searchInput';
-import { getPigeons } from '@/lib/pigeon';
+import { getPigeons } from '@/lib/user';
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+
+export const metadata: Metadata = {
+	title: 'Mis palomos',
+	description:
+		'Aquí encontrarás todos los palomos que has registrado en tu cuenta de usuario. ¡Prueba a filtrar para conseguir una búsqueda más rapida!',
+};
 
 export default async function PigeonsPage() {
 	const token = cookies().get('token')?.value || '';
