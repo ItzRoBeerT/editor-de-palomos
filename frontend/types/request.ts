@@ -10,4 +10,6 @@ export type Pigeon = {
 	ring: string;
 	feather: string;
 	birthday: string;
+	father?: string;
+	mother?: string;
 };

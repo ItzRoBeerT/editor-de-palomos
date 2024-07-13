@@ -1,9 +1,19 @@
+'use client';
+import { useFormState } from 'react-dom';
 import Card from '../containers/card';
+import { createPigeon } from '@/actions/pigeon';
 
-export default function PigeonForm() {
+interface Props {
+	token: string;
+}
+
+export default function PigeonForm(props: Props) {
+	const { token } = props;
+	const [state, formAction] = useFormState(createPigeon.bind(null, token), { errors: {} });
+
 	return (
 		<Card>
-			<form className="space-y-6 p-4">
+			<form className="space-y-6 p-4" action={formAction}>
 				<div>
 					<label
 						htmlFor="name"
@@ -14,6 +24,7 @@ export default function PigeonForm() {
 					<input
 						type="text"
 						id="name"
+						name="name"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 						required
 					/>
@@ -29,6 +40,7 @@ export default function PigeonForm() {
 					<input
 						type="text"
 						id="ring"
+						name="ring"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 						required
 					/>
@@ -44,6 +56,7 @@ export default function PigeonForm() {
 					<input
 						type="text"
 						id="feather"
+						name="feather"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 						required
 					/>
@@ -59,6 +72,7 @@ export default function PigeonForm() {
 					<input
 						type="date"
 						id="birthday"
+						name="birthday"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 						required
 					/>
@@ -74,6 +88,7 @@ export default function PigeonForm() {
 					<input
 						type="text"
 						id="father"
+						name="father"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
 				</div>
@@ -88,6 +103,7 @@ export default function PigeonForm() {
 					<input
 						type="text"
 						id="mother"
+						name="mother"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
 				</div>
