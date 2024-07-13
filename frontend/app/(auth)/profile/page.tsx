@@ -1,6 +1,7 @@
 import Card from '@/components/containers/card';
 import { getUser } from '@/lib/user';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export async function generateMetadata() {
@@ -20,7 +21,8 @@ export default async function ProfilePage() {
 	const user = await getUser(token);
 
 	return (
-		<main className="flex flex-col items-center justify-center min-h-screen">
+		<main className="flex flex-col items-center min-h-screen">
+			<Image alt="colombicultura" src="/colombicultura.png" width={200} height={200} />
 			<div className="container m-4">
 				<div className="max-w-3xl w-full mx-auto grid gap-4 grid-cols-1">
 					<Card>
@@ -39,7 +41,7 @@ export default async function ProfilePage() {
 						</div>
 						<div className="col-span-12 sm:col-span-4">
 							<Card>
-							<Link href={'/profile/pigeon-form'}>Agregar nuevo palomo</Link>
+								<Link href={'/profile/pigeon-form'}>Agregar nuevo palomo</Link>
 							</Card>
 						</div>
 					</div>

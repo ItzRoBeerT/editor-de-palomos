@@ -12,7 +12,7 @@ export default async function PigeonFormPage() {
 	const token = cookies().get('token')?.value || '';
 
 	return (
-		<main className="container mx-auto max-w-4xl p-4 md:p-8">
+		<main>
 			<Card className="mb-4">
 				<h1 className="text-3xl text-center">Añade un nuevo palomo</h1>
 			</Card>
