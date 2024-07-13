@@ -36,7 +36,7 @@ export default async function ProfilePage() {
 						</div>
 						<div className="col-span-12 sm:col-span-4">
 							<Card>
-								<p>Estadisticas</p>
+								<p>Capturas</p>
 							</Card>
 						</div>
 						<div className="col-span-12 sm:col-span-4">

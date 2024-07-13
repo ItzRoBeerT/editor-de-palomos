@@ -10,10 +10,10 @@ export default async function PigeonsPage() {
 	return (
 		<main>
 			<h1 className="text-center text-4xl">Mis palomos</h1>
-			<div className='flex flex-col gap-3 mt-3'>
+			<div className="flex flex-col gap-3 mt-3">
 				<SearchInput />
 				{pigeons.map((pigeon) => (
-					<Card key={pigeon.ring}>
+					<Card key={pigeon.ring} href={`pigeons/${pigeon.ring}`}>
 						{pigeon.name ? (
 							<p>Nombre: {pigeon.name}</p>
 						) : (
