@@ -30,8 +30,8 @@ export default async function ProfilePage() {
 					</Card>
 					<div className="grid grid-cols-12 gap-4">
 						<div className="col-span-12 sm:col-span-4">
-							<Card>
-								<Link href={'/profile/pigeons'}>Mis palomos</Link>
+							<Card href="/profile/pigeons">
+								<p>Mis palomos</p>
 							</Card>
 						</div>
 						<div className="col-span-12 sm:col-span-4">
@@ -40,8 +40,8 @@ export default async function ProfilePage() {
 							</Card>
 						</div>
 						<div className="col-span-12 sm:col-span-4">
-							<Card>
-								<Link href={'/profile/pigeon-form'}>Agregar nuevo palomo</Link>
+							<Card href={'/profile/pigeon-form'}>
+								<p>Agregar nuevo palomo</p>
 							</Card>
 						</div>
 					</div>

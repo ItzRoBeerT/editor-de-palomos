@@ -13,9 +13,9 @@ export default function Card(props: CardProps) {
 
 	if (href) {
 		return (
-			<Link href={href} className={combinedClassName}>
-				{children}
-			</Link>
+			<div className={combinedClassName}>
+				<Link href={href}>{children}</Link>
+			</div>
 		);
 	}
 

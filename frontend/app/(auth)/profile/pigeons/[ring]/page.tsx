@@ -1,3 +1,4 @@
+import Card from '@/components/containers/card';
 import { getPigeon } from '@/lib/pigeon';
 import { cookies } from 'next/headers';
 
@@ -13,11 +14,11 @@ export default async function Pigeon(props: Props) {
 	const token = cookies().get('token')?.value || '';
 	const pigeon = await getPigeon(token, ring);
 
-	console.log(pigeon);
-
 	return (
 		<main>
-			<h1>{pigeon.name}</h1>
+			<Card>
+				<h1>{pigeon.name} de </h1>
+			</Card>
 			<p>{pigeon.feather}</p>
 			<p>{pigeon.birthday}</p>
 			<p>{pigeon.ring}</p>
