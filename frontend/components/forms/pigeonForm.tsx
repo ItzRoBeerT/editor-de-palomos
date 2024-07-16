@@ -2,14 +2,32 @@
 import { useFormState } from 'react-dom';
 import Card from '../containers/card';
 import { createPigeon } from '@/actions/pigeon';
+import { Pigeon } from '@/types/request';
+import CustomSelect from '../ui/customSelect';
 
 interface Props {
 	token: string;
+	pigeons: Pigeon[];
 }
 
 export default function PigeonForm(props: Props) {
-	const { token } = props;
+	const { token, pigeons } = props;
 	const [state, formAction] = useFormState(createPigeon.bind(null, token), { errors: {} });
+
+	const malePigeons = pigeons
+		.filter((pigeon) => pigeon.gender === 'male')
+		.map((pigeon) => (
+			<option key={pigeon.ring} value={pigeon.ring}>
+				{pigeon.name}
+			</option>
+		));
+	const femalePigeons = pigeons
+		.filter((pigeon) => pigeon.gender === 'female')
+		.map((pigeon) => (
+			<option key={pigeon.ring} value={pigeon.ring}>
+				{pigeon.name}
+			</option>
+		));
 
 	return (
 		<Card>
@@ -61,6 +79,15 @@ export default function PigeonForm(props: Props) {
 						required
 					/>
 				</div>
+				<select
+					id="gender"
+					name="gender"
+					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				>
+					<option value="">Género</option>
+					<option value="male">Macho</option>
+					<option value="female">Hembra</option>
+				</select>
 
 				<div>
 					<label
@@ -79,32 +106,20 @@ export default function PigeonForm(props: Props) {
 				</div>
 
 				<div>
-					<label
-						htmlFor="father"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Padre
-					</label>
-					<input
-						type="text"
-						id="father"
+					<CustomSelect
+						options={malePigeons}
+						defaultOption={'Seleccionar padre'}
+						id='father'
 						name="father"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
 				</div>
 
 				<div>
-					<label
-						htmlFor="mother"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Madre
-					</label>
-					<input
-						type="text"
-						id="mother"
+					<CustomSelect
+						options={femalePigeons}
+						defaultOption={'Seleccionar madre'}
+						id='mother'
 						name="mother"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					/>
 				</div>
 

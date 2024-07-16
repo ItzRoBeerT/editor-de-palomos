@@ -12,6 +12,7 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 	const birthday = formData.get('birthday');
 	const father = formData.get('father');
 	const mother = formData.get('mother');
+	const gender = formData.get('gender');
 
 	let errors: Errors = {};
 
@@ -27,6 +28,10 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 		errors.ring = 'La fecha de nacimiento es obligatoria';
 	}
 
+	if (!gender) {
+		errors.gender = 'El campo género es obligatorio';
+	}
+
 	if (Object.keys(errors).length > 0) {
 		return { errors };
 	}
@@ -37,6 +42,7 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 		feather: feather as string,
 		ring: ring as string,
 		father: father as string,
+		gender: gender as string,
 		mother: mother as string,
 	};
 

@@ -20,6 +20,11 @@ const pigeonSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 	},
+	gender: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 	father: {
 		type: String,
 		required: false,

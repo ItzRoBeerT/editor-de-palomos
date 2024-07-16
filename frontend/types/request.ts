@@ -8,6 +8,7 @@ export type User = {
 export type Pigeon = {
 	name: string;
 	ring: string;
+	gender: 'male' | 'female' | string;
 	feather: string;
 	birthday: string;
 	father?: string;
