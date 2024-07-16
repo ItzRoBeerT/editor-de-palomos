@@ -1,5 +1,7 @@
+'use server';
 import { addPigeon } from '@/lib/pigeon';
 import { Pigeon } from '@/types/request';
+import { revalidatePath } from 'next/cache';
 
 interface Errors {
 	[key: string]: string;
@@ -51,4 +53,6 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 	} catch (error) {
 		console.error('Error adding pigeon:', error);
 	}
+
+	revalidatePath('/', 'layout');
 }

@@ -4,6 +4,7 @@ import Card from '../containers/card';
 import { createPigeon } from '@/actions/pigeon';
 import { Pigeon } from '@/types/request';
 import CustomSelect from '../ui/customSelect';
+import FormSubmit from './form-submit';
 
 interface Props {
 	token: string;
@@ -109,7 +110,7 @@ export default function PigeonForm(props: Props) {
 					<CustomSelect
 						options={malePigeons}
 						defaultOption={'Seleccionar padre'}
-						id='father'
+						id="father"
 						name="father"
 					/>
 				</div>
@@ -118,17 +119,12 @@ export default function PigeonForm(props: Props) {
 					<CustomSelect
 						options={femalePigeons}
 						defaultOption={'Seleccionar madre'}
-						id='mother'
+						id="mother"
 						name="mother"
 					/>
 				</div>
 
-				<button
-					type="submit"
-					className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-				>
-					Crear palomo
-				</button>
+				<FormSubmit text="Crear palomo" />
 			</form>
 		</Card>
 	);

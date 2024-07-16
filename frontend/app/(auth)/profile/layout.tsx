@@ -7,7 +7,6 @@ export default function AuthRootLayout({
 	children: React.ReactNode;
 }>) {
 	const token = cookies().get('token')?.value;
-	console.log({ token });
 	if (!token) {
 		return redirect('/');
 	}
