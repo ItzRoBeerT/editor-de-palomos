@@ -52,4 +52,19 @@ router.post('/pigeon/search', auth, async (req, res) => {
 	}
 });
 
+router.patch('/pigeon/update', auth, async (req, res) => {
+	try {
+		const newPigeon = req.body.pigeon;
+		const pigeon = await Pigeon.findOne({ ring: newPigeon.ring });
+		if (!pigeon) return es.status(404).send({ error: 'No se encontró el palomo a modificar' });
+
+		Object.keys(newPigeon).map((update) => (pigeon[update] = newPigeon[update]));
+		await pigeon.save();
+
+		res.status(200).send({ pigeon });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
 module.exports = router;
