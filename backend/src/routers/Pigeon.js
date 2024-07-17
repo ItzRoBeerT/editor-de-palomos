@@ -35,4 +35,21 @@ router.post('/pigeon/get', auth, async (req, res) => {
 	}
 });
 
+router.post('/pigeon/search', auth, async (req, res) => {
+	const search = req.body.search;
+
+	try {
+		const filteredPigeons = await Pigeon.find({
+			$or: [
+				{ ring: { $regex: search, $options: 'i' } },
+				{ name: { $regex: search, $options: 'i' } },
+			],
+		}).exec();
+
+		res.status(200).send({ filteredPigeons });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
 module.exports = router;

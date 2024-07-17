@@ -1,11 +1,29 @@
 'use client';
+import { searchPigeon } from '@/lib/pigeon';
+import { Pigeon } from '@/types/request';
 import Image from 'next/image';
 
-export default function SearchInput() {
-	const onHandleChange = (e: any) => {
-		const test = e.target.value;
-		console.log(test);
-	};
+export interface Props {
+	token: string;
+	updatePigeons: (e: Pigeon[]) => void;
+}
+
+export default function SearchInput(props: Props) {
+	const { token, updatePigeons } = props;
+	let timeout: any = null;
+
+	async function onHandleChange(e: any) {
+		const searchValue = e.target.value;
+
+		if (timeout) {
+			clearTimeout(timeout);
+		}
+
+		timeout = setTimeout(async () => {
+			const filteredPigeons = await searchPigeon(token, searchValue);
+			updatePigeons(filteredPigeons);
+		}, 1000);
+	}
 
 	return (
 		<div className="relative w-full">
