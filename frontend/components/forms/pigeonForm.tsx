@@ -5,6 +5,7 @@ import { createPigeon } from '@/actions/pigeon';
 import { Pigeon } from '@/types/request';
 import CustomSelect from '../ui/customSelect';
 import FormSubmit from './form-submit';
+import { getFemalePigeons, getMalePigeons } from '@/functions/utils';
 
 interface Props {
 	token: string;
@@ -15,20 +16,8 @@ export default function PigeonForm(props: Props) {
 	const { token, pigeons } = props;
 	const [state, formAction] = useFormState(createPigeon.bind(null, token), { errors: {} });
 
-	const malePigeons = pigeons
-		.filter((pigeon) => pigeon.gender === 'male')
-		.map((pigeon) => (
-			<option key={pigeon.ring} value={pigeon.ring}>
-				{pigeon.name ? `${pigeon.name} - ${pigeon.ring}` : pigeon.ring}
-			</option>
-		));
-	const femalePigeons = pigeons
-		.filter((pigeon) => pigeon.gender === 'female')
-		.map((pigeon) => (
-			<option key={pigeon.ring} value={pigeon.ring}>
-				{pigeon.name ? `${pigeon.name} - ${pigeon.ring}` : pigeon.ring}
-			</option>
-		));
+	const malePigeons = getMalePigeons(pigeons);
+	const femalePigeons = getFemalePigeons(pigeons);
 
 	return (
 		<Card>
