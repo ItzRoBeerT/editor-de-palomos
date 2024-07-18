@@ -46,10 +46,10 @@ export default function ViewPigeon(props: Props) {
 				</p>
 			</Card>
 			<div className="grid grid-cols-2 gap-4">
-				<Card className="text-center">
+				<Card className="text-center" href={pigeon.father ? pigeon.father : ''}>
 					{pigeon.father ? <p>Padre: {pigeon.father}</p> : <p>Sin padre</p>}
 				</Card>
-				<Card className="text-center">
+				<Card className="text-center" href={pigeon.mother ? pigeon.mother : ''}>
 					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
