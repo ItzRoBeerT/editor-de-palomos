@@ -1,4 +1,3 @@
-
 import { Pigeon, User } from '@/types/request';
 import { cookies } from 'next/headers';
 
@@ -8,7 +7,7 @@ export async function loginUser(email: string, password: string) {
 		password,
 	};
 
-	const response = await fetch('http://localhost:4321/user/login', {
+	const response = await fetch(process.env.URI + 'user/login', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -24,10 +23,10 @@ export async function loginUser(email: string, password: string) {
 }
 
 export async function getUser(token: string) {
-	const response = await fetch('http://localhost:4321/user/me', {
+	const response = await fetch(process.env.URI + 'user/me', {
 		method: 'GET',
 		headers: {
-            'Authorization': `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
 	});
@@ -44,7 +43,7 @@ export async function getUser(token: string) {
 }
 
 export async function getPigeons(token: string) {
-	const response = await fetch('http://localhost:4321/user/getPigeons', {
+	const response = await fetch(process.env.URI + 'user/getPigeons', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,

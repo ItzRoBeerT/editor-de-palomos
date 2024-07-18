@@ -2,7 +2,7 @@ import { Pigeon } from '@/types/request';
 import { redirect } from 'next/navigation';
 
 export async function addPigeon(pigeon: Pigeon, token: string) {
-	const response = await fetch('http://localhost:4321/pigeon/add', {
+	const response = await fetch(process.env.URI + 'pigeon/add', {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -20,7 +20,7 @@ export async function addPigeon(pigeon: Pigeon, token: string) {
 }
 
 export async function updatePigeon(pigeon: Pigeon, token: string) {
-	const response = await fetch('http://localhost:4321/pigeon/update', {
+	const response = await fetch(process.env.URI + 'pigeon/update', {
 		method: 'PATCH',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ export async function updatePigeon(pigeon: Pigeon, token: string) {
 }
 
 export async function getPigeon(token: string, ring: string) {
-	const response = await fetch('http://localhost:4321/pigeon/get', {
+	const response = await fetch(process.env.URI + 'pigeon/get', {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ export async function getPigeon(token: string, ring: string) {
 }
 
 export async function searchPigeon(token: string, searchValue: string) {
-	const response = await fetch('http://localhost:4321/pigeon/search', {
+	const response = await fetch(process.env.URI + 'pigeon/search', {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ export async function searchPigeon(token: string, searchValue: string) {
 }
 
 export async function deletePigeon(token: string, ring: string) {
-	const response = await fetch('http://localhost:4321/pigeon/delete', {
+	const response = await fetch(process.env.URI + 'pigeon/delete', {
 		method: 'DELETE',
 		headers: {
 			Authorization: `Bearer ${token}`,
