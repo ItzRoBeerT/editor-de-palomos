@@ -19,19 +19,14 @@ export default function PigeonForm(props: Props) {
 		.filter((pigeon) => pigeon.gender === 'male')
 		.map((pigeon) => (
 			<option key={pigeon.ring} value={pigeon.ring}>
-				{
-				pigeon.name ? (
-					`${pigeon.name} - ${pigeon.ring}`
-				): pigeon.ring 
-				
-				}
+				{pigeon.name ? `${pigeon.name} - ${pigeon.ring}` : pigeon.ring}
 			</option>
 		));
 	const femalePigeons = pigeons
 		.filter((pigeon) => pigeon.gender === 'female')
 		.map((pigeon) => (
 			<option key={pigeon.ring} value={pigeon.ring}>
-				{pigeon.name}
+				{pigeon.name ? `${pigeon.name} - ${pigeon.ring}` : pigeon.ring}
 			</option>
 		));
 
