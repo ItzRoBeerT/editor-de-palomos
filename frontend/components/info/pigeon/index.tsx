@@ -6,10 +6,11 @@ import EditPigeon from './edit';
 
 export interface Props {
 	pigeon: Pigeon;
+	pigeons: Pigeon[];
 	user: User;
 }
 export default function PigeonInfo(props: Props) {
-	const { pigeon, user } = props;
+	const { pigeon, user, pigeons } = props;
 	const pigeonName = pigeon.name ? pigeon.name : pigeon.ring;
 	const [mode, setMode] = useState<'view' | 'edit'>('view');
 
@@ -20,6 +21,6 @@ export default function PigeonInfo(props: Props) {
 	return mode === 'view' ? (
 		<ViewPigeon pigeon={pigeon} user={user} onHandleMode={handleMode} />
 	) : (
-		<EditPigeon pigeon={pigeon} user={user} onHandleMode={handleMode}/>
+		<EditPigeon pigeon={pigeon} user={user} onHandleMode={handleMode} pigeons={pigeons} />
 	);
 }

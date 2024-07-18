@@ -1,6 +1,6 @@
 import PigeonInfo from '@/components/info/pigeon/index';
 import { getPigeon } from '@/lib/pigeon';
-import { getUser } from '@/lib/user';
+import { getPigeons, getUser } from '@/lib/user';
 import { cookies } from 'next/headers';
 
 interface Props {
@@ -15,10 +15,11 @@ export default async function Pigeon(props: Props) {
 	const token = cookies().get('token')?.value || '';
 	const user = await getUser(token);
 	const pigeon = await getPigeon(token, ring);
+	const pigeons = await getPigeons(token);
 
 	return (
 		<main>
-			<PigeonInfo pigeon={pigeon} user={user}/>
+			<PigeonInfo pigeon={pigeon} user={user} pigeons={pigeons} />
 		</main>
 	);
 }
