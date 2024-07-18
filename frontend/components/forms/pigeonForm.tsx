@@ -19,7 +19,12 @@ export default function PigeonForm(props: Props) {
 		.filter((pigeon) => pigeon.gender === 'male')
 		.map((pigeon) => (
 			<option key={pigeon.ring} value={pigeon.ring}>
-				{pigeon.name}
+				{
+				pigeon.name ? (
+					`${pigeon.name} - ${pigeon.ring}`
+				): pigeon.ring 
+				
+				}
 			</option>
 		));
 	const femalePigeons = pigeons
@@ -45,7 +50,6 @@ export default function PigeonForm(props: Props) {
 						id="name"
 						name="name"
 						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						required
 					/>
 				</div>
 
