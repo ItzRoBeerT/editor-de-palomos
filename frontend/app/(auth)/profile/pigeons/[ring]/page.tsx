@@ -1,4 +1,4 @@
-import PigeonInfo from '@/components/info/pigeon';
+import PigeonInfo from '@/components/info/pigeon/index';
 import { getPigeon } from '@/lib/pigeon';
 import { getUser } from '@/lib/user';
 import { cookies } from 'next/headers';
