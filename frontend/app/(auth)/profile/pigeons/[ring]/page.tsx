@@ -19,7 +19,7 @@ export default async function Pigeon(props: Props) {
 
 	return (
 		<main>
-			<PigeonInfo pigeon={pigeon} user={user} pigeons={pigeons} />
+			<PigeonInfo pigeon={pigeon} user={user} pigeons={pigeons} token={token} />
 		</main>
 	);
 }

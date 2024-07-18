@@ -18,6 +18,23 @@ export async function addPigeon(pigeon: Pigeon, token: string) {
 	return data;
 }
 
+export async function updatePigeon(pigeon: Pigeon, token: string) {
+	const response = await fetch('http://localhost:4321/pigeon/update', {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({pigeon}),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
+}
+
 export async function getPigeon(token: string, ring: string) {
 	const response = await fetch('http://localhost:4321/pigeon/get', {
 		method: 'POST',
