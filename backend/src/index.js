@@ -14,6 +14,6 @@ app.use(express.json());
 app.use(userRouter);
 app.use(pigeonRouter);
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
 	console.log('Server is up on port ' + port);
 });
