@@ -2,15 +2,17 @@ import { Pigeon, User } from '@/types/request';
 import Card from '../../containers/card';
 import Image from 'next/image';
 import moment from 'moment';
+import FormDelete from '@/components/forms/form-delete';
 
 export interface Props {
 	pigeon: Pigeon;
 	user: User;
+	token: string;
 	onHandleMode: () => void;
 }
 
 export default function ViewPigeon(props: Props) {
-	const { pigeon, user, onHandleMode } = props;
+	const { pigeon, user, onHandleMode, token } = props;
 	const pigeonName = pigeon.name ? pigeon.name : pigeon.ring;
 
 	function handleMode() {
@@ -53,6 +55,7 @@ export default function ViewPigeon(props: Props) {
 					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
+			<FormDelete pigeon={pigeon} token={token} />
 		</div>
 	);
 }

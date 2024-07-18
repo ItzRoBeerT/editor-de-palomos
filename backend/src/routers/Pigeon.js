@@ -67,4 +67,43 @@ router.patch('/pigeon/update', auth, async (req, res) => {
 	}
 });
 
+router.delete('/pigeon/delete', auth, async (req, res) => {
+	try {
+		const pigeonRing = req.body.ring;
+		const pigeon = await Pigeon.findOne({ ring: pigeonRing });
+
+		if (!pigeon) {
+			return res.status(404).send('No se ha encontrado el palomo a eliminar.');
+		}
+		//buscar en los palomos si su father o mother es este palomo
+		const relatedPigeons = await Pigeon.find({
+			$or: [{ father: pigeon._id }, { mother: pigeon._id }],
+		});
+
+		if (relatedPigeons.length > 0) {
+			for (const relatedPigeon of relatedPigeons) {
+				if (relatedPigeon.father === pigeon.ring) {
+					relatedPigeon.father = '';
+				}
+				if (relatedPigeon.mother === pigeon.ring) {
+					relatedPigeon.mother = '';
+				}
+				await relatedPigeon.save();
+			}
+		}
+
+		// Verificar si el usuario autenticado es el dueño del palomo
+		const user = req.user;
+		if (!user || user._id.toString() !== pigeon.userId.toString()) {
+			return res.status(403).send('No tienes permiso para eliminar este palomo.');
+		}
+
+		await Pigeon.deleteOne({ ring: pigeonRing });
+
+		res.status(200).send({message: 'Palomo eliminado exitosamente.'});
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
 module.exports = router;

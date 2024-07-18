@@ -1,8 +1,8 @@
 'use server';
-import { addPigeon, updatePigeon } from '@/lib/pigeon';
+import { addPigeon, deletePigeon, updatePigeon } from '@/lib/pigeon';
 import { Pigeon } from '@/types/request';
-import { log } from 'console';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 interface Errors {
 	[key: string]: string;
@@ -106,4 +106,11 @@ export async function modifyPigeon(token: string, prevState: any, formData: Form
 	}
 
 	revalidatePath('/', 'layout');
+}
+
+export async function removePigeon(token: string, ring: string) {
+	await deletePigeon(token, ring);
+	revalidatePath('/');
+	redirect('/profile');
+	return {}
 }

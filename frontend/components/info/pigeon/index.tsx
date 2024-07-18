@@ -20,7 +20,7 @@ export default function PigeonInfo(props: Props) {
 		else setMode('view');
 	}
 	return mode === 'view' ? (
-		<ViewPigeon pigeon={pigeon} user={user} onHandleMode={handleMode} />
+		<ViewPigeon pigeon={pigeon} user={user} onHandleMode={handleMode} token={token}/>
 	) : (
 		<EditPigeon
 			token={token}

@@ -1,4 +1,5 @@
 import { Pigeon } from '@/types/request';
+import { redirect } from 'next/navigation';
 
 export async function addPigeon(pigeon: Pigeon, token: string) {
 	const response = await fetch('http://localhost:4321/pigeon/add', {
@@ -25,7 +26,7 @@ export async function updatePigeon(pigeon: Pigeon, token: string) {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({pigeon}),
+		body: JSON.stringify({ pigeon }),
 	});
 
 	if (!response.ok) {
@@ -73,4 +74,23 @@ export async function searchPigeon(token: string, searchValue: string) {
 	const pigeons: Pigeon[] = data.filteredPigeons;
 
 	return pigeons;
+}
+
+export async function deletePigeon(token: string, ring: string) {
+	const response = await fetch('http://localhost:4321/pigeon/delete', {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ ring }),
+	});
+
+	console.log(response);
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
 }
