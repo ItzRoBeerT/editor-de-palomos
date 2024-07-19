@@ -3,15 +3,16 @@ import { useFormStatus } from 'react-dom';
 
 export interface Props {
 	text?: string;
+	loadingText?: string;
 	type?: 'submit' | 'delete';
 }
 export default function FormSubmit(props: Props) {
-	const { text, type = 'submit' } = props;
-
+	const { text, loadingText, type = 'submit' } = props;
 	const status = useFormStatus();
+	const loadingString = loadingText ? loadingText : 'Cargando';
 
 	if (status.pending) {
-		return <p>Creando Palomo...</p>;
+		return <p>{loadingString}</p>;
 	}
 
 	return type === 'submit' ? (
