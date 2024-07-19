@@ -18,10 +18,13 @@ export interface Props {
 }
 
 export default function EditPigeon(props: Props) {
+	//#region VARIABLES
 	const { pigeon, user, pigeons, token, onHandleMode } = props;
 	const pigeonName = pigeon.name ? pigeon.name : pigeon.ring;
 	const date = moment(pigeon.birthday).format('YYYY-MM-DD');
 	const [state, formAction] = useFormState(modifyPigeon.bind(null, token), { errors: {} });
+	//#endregion
+
 	//#region FUNCTIONS
 	function handleMode() {
 		onHandleMode();

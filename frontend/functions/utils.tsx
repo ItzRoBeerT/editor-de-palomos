@@ -19,3 +19,12 @@ export function getFemalePigeons(pigeons: Pigeon[]) {
 			</option>
 		));
 }
+
+export function getUri() {
+	if (process.env.NEXT_PUBLIC_ENV === 'DEVELOP') {
+		console.log('DEVELOP MODE');
+		return process.env.NEXT_PUBLIC_API_URL_DEVELOP;
+	} else {
+		return process.env.NEXT_PUBLIC_API_URL;
+	}
+}
