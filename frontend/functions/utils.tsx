@@ -21,10 +21,10 @@ export function getFemalePigeons(pigeons: Pigeon[]) {
 }
 
 export function getUri() {
-	if (process.env.ENV === 'DEVELOP') {
+	if (process.env.NEXT_PUBLIC_ENV === 'DEVELOP') {
 		console.log('DEVELOP MODE');
-		return process.env.URI_DEVELOP;
+		return process.env.NEXT_PUBLIC_API_URL_DEVELOP;
 	} else {
-		return process.env.URI;
+		return process.env.NEXT_PUBLIC_API_URL;
 	}
 }
