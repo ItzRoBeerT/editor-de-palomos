@@ -4,6 +4,15 @@ const Pigeon = require('../models/Pigeon');
 const auth = require('../middleware/auth');
 const router = new express.Router();
 
+
+router.get('/test', async (req, res) => {
+	try {
+		res.status(200).send({message: 'Test para el editor de palomos!'})
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+})
+
 router.post('/user/createAccount', async (req, res) => {
 	const user = new User(req.body);
 	try {
