@@ -1,5 +1,8 @@
+import { getUri } from '@/functions/utils';
 import { Pigeon, User } from '@/types/request';
 import { cookies } from 'next/headers';
+
+const URI = getUri();
 
 export async function loginUser(email: string, password: string) {
 	const userCredentials = {
@@ -7,7 +10,7 @@ export async function loginUser(email: string, password: string) {
 		password,
 	};
 
-	const response = await fetch(process.env.URI + 'user/login', {
+	const response = await fetch(URI + 'user/login', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -23,7 +26,7 @@ export async function loginUser(email: string, password: string) {
 }
 
 export async function getUser(token: string) {
-	const response = await fetch(process.env.URI + 'user/me', {
+	const response = await fetch(URI + 'user/me', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -43,7 +46,7 @@ export async function getUser(token: string) {
 }
 
 export async function getPigeons(token: string) {
-	const response = await fetch(process.env.URI + 'user/getPigeons', {
+	const response = await fetch(URI + 'user/getPigeons', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,
