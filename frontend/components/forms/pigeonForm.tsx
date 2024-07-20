@@ -52,8 +52,8 @@ export default function PigeonForm(props: Props) {
 				<CustomSelect
 					options={genders}
 					label="Género"
-					defaultOption="Seleccionar género"
 					required
+					placeHolder="Género"
 					id="gender"
 					name="gender"
 				/>
@@ -71,9 +71,9 @@ export default function PigeonForm(props: Props) {
 				<div>
 					<CustomSelect
 						options={malePigeons}
-						defaultOption={'Seleccionar padre'}
 						id="father"
 						name="father"
+						placeHolder="Padre"
 						label="Nombre - Anilla"
 					/>
 				</div>
@@ -81,8 +81,8 @@ export default function PigeonForm(props: Props) {
 				<div>
 					<CustomSelect
 						options={femalePigeons}
-						defaultOption={'Seleccionar madre'}
 						id="mother"
+						placeHolder="Madre"
 						name="mother"
 						label="Nombre - Anilla"
 					/>

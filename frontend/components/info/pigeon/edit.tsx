@@ -102,8 +102,8 @@ export default function EditPigeon(props: Props) {
 					<CustomSelect
 						label="Nombre - Anilla"
 						options={getMalePigeons(pigeons)}
-						defaultOption={'Padre'}
 						defaultValue={pigeon.father ? pigeon.father : ''}
+						placeHolder="Padre"
 						id="father"
 						name="father"
 					/>
@@ -112,8 +112,8 @@ export default function EditPigeon(props: Props) {
 					<CustomSelect
 						label="Nombre - Anilla"
 						options={getFemalePigeons(pigeons)}
-						defaultOption={'Madre'}
-						defaultValue={pigeon.father ? pigeon.father : ''}
+						defaultValue={pigeon.mother ? pigeon.mother : ''}
+						placeHolder="Madre"
 						id="mother"
 						name="mother"
 					/>
