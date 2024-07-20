@@ -7,6 +7,7 @@ import CustomSelect from '../ui/customSelect';
 import FormSubmit from './form-submit';
 import { getFemalePigeons, getGenders, getMalePigeons } from '@/functions/utils';
 import FloatingInput from '../ui/floating-input';
+import toast from 'react-hot-toast';
 
 interface Props {
 	token: string;
@@ -20,6 +21,18 @@ export default function PigeonForm(props: Props) {
 	const malePigeons = getMalePigeons(pigeons);
 	const femalePigeons = getFemalePigeons(pigeons);
 	const genders = getGenders();
+
+	if (state?.errors?.response) {
+		toast.error(state.errors.response, {
+			duration: 2000,
+		});
+	}
+
+	if (state?.success) {
+		toast.success('Palomo creado correctamente', {
+			duration: 2000,
+		});
+	}
 
 	return (
 		<Card>
