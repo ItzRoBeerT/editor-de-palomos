@@ -102,6 +102,7 @@ export default function EditPigeon(props: Props) {
 			<div className="grid grid-cols-2 gap-4">
 				<Card className="text-center">
 					<CustomSelect
+						label="Nombre - Anilla"
 						options={getMalePigeons(pigeons)}
 						defaultOption={'Padre'}
 						defaultValue={pigeon.father ? pigeon.father : ''}
@@ -111,6 +112,7 @@ export default function EditPigeon(props: Props) {
 				</Card>
 				<Card className="text-center">
 					<CustomSelect
+						label="Nombre - Anilla"
 						options={getFemalePigeons(pigeons)}
 						defaultOption={'Madre'}
 						defaultValue={pigeon.father ? pigeon.father : ''}
