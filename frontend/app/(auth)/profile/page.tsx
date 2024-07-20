@@ -2,7 +2,6 @@ import Card from '@/components/containers/card';
 import { getUser } from '@/lib/user';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export async function generateMetadata() {
 	const token = cookies().get('token')?.value || '';
