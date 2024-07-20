@@ -5,7 +5,9 @@ import { createPigeon } from '@/actions/pigeon';
 import { Pigeon } from '@/types/request';
 import CustomSelect from '../ui/customSelect';
 import FormSubmit from './form-submit';
-import { getFemalePigeons, getMalePigeons } from '@/functions/utils';
+import { getFemalePigeons, getGenders, getMalePigeons } from '@/functions/utils';
+import FloatingInput from '../ui/floating-input';
+import toast from 'react-hot-toast';
 
 interface Props {
 	token: string;
@@ -18,78 +20,50 @@ export default function PigeonForm(props: Props) {
 
 	const malePigeons = getMalePigeons(pigeons);
 	const femalePigeons = getFemalePigeons(pigeons);
+	const genders = getGenders();
+
+	if (state?.errors?.response) {
+		toast.error(state.errors.response, {
+			duration: 2000,
+		});
+	}
+
+	if (state?.success) {
+		toast.success('Palomo creado correctamente', {
+			duration: 2000,
+		});
+	}
 
 	return (
 		<Card>
 			<form className="space-y-6 p-4" action={formAction}>
 				<div>
-					<label
-						htmlFor="name"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Nombre
-					</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					/>
+					<FloatingInput label="Nombre" type="text" id="name" name="name" />
 				</div>
 
 				<div>
-					<label
-						htmlFor="ring"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Anilla
-					</label>
-					<input
-						type="text"
-						id="ring"
-						name="ring"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						required
-					/>
+					<FloatingInput label="Anilla" type="text" id="ring" name="ring" required />
 				</div>
 
 				<div>
-					<label
-						htmlFor="feather"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Pluma
-					</label>
-					<input
-						type="text"
-						id="feather"
-						name="feather"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						required
-					/>
+					<FloatingInput label="Pluma" type="text" name="feather" id="feather" required />
 				</div>
-				<select
+
+				<CustomSelect
+					options={genders}
+					label="Género"
+					defaultOption="Seleccionar género"
+					required
 					id="gender"
 					name="gender"
-					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-				>
-					<option value="">Género</option>
-					<option value="male">Macho</option>
-					<option value="female">Hembra</option>
-				</select>
+				/>
 
 				<div>
-					<label
-						htmlFor="birthday"
-						className="block text-sm font-medium text-gray-900 dark:text-white"
-					>
-						Fecha de nacimiento
-					</label>
-					<input
+					<FloatingInput
 						type="date"
 						id="birthday"
 						name="birthday"
-						className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						label="Fecha de nacimiento"
 						required
 					/>
 				</div>
@@ -100,6 +74,7 @@ export default function PigeonForm(props: Props) {
 						defaultOption={'Seleccionar padre'}
 						id="father"
 						name="father"
+						label="Nombre - Anilla"
 					/>
 				</div>
 
@@ -109,6 +84,7 @@ export default function PigeonForm(props: Props) {
 						defaultOption={'Seleccionar madre'}
 						id="mother"
 						name="mother"
+						label="Nombre - Anilla"
 					/>
 				</div>
 

@@ -53,9 +53,12 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 		await addPigeon(newPigeon, token);
 	} catch (error) {
 		console.error('Error adding pigeon:', error);
+		errors.response = 'Error al añadir el palomo';
+		return { errors };
 	}
 
 	revalidatePath('/', 'layout');
+	return { success: true };
 }
 
 export async function modifyPigeon(token: string, prevState: any, formData: FormData) {
@@ -112,5 +115,5 @@ export async function removePigeon(token: string, ring: string) {
 	await deletePigeon(token, ring);
 	revalidatePath('/');
 	redirect('/profile');
-	return {}
+	return {};
 }

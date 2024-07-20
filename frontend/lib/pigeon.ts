@@ -88,8 +88,6 @@ export async function deletePigeon(token: string, ring: string) {
 		body: JSON.stringify({ ring }),
 	});
 
-	console.log(response);
-
 	if (!response.ok) {
 		throw new Error(`HTTP error! Status: ${response.status}`);
 	}

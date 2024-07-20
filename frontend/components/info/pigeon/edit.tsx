@@ -39,9 +39,7 @@ export default function EditPigeon(props: Props) {
 				) : (
 					<Image src="/female.svg" alt="female" width={32} height={32} />
 				)}
-				<h1 className="text-4xl w-full">
-					{pigeonName} de {user.name}
-				</h1>
+				<h1 className="text-4xl w-full">{pigeonName}</h1>
 				<div onClick={handleMode}>
 					<Image src={'/edit.svg'} alt="edit" width={32} height={32} />
 				</div>
@@ -102,6 +100,7 @@ export default function EditPigeon(props: Props) {
 			<div className="grid grid-cols-2 gap-4">
 				<Card className="text-center">
 					<CustomSelect
+						label="Nombre - Anilla"
 						options={getMalePigeons(pigeons)}
 						defaultOption={'Padre'}
 						defaultValue={pigeon.father ? pigeon.father : ''}
@@ -111,6 +110,7 @@ export default function EditPigeon(props: Props) {
 				</Card>
 				<Card className="text-center">
 					<CustomSelect
+						label="Nombre - Anilla"
 						options={getFemalePigeons(pigeons)}
 						defaultOption={'Madre'}
 						defaultValue={pigeon.father ? pigeon.father : ''}
