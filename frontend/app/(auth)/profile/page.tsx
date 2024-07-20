@@ -2,7 +2,6 @@ import Card from '@/components/containers/card';
 import { getUser } from '@/lib/user';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export async function generateMetadata() {
 	const token = cookies().get('token')?.value || '';
@@ -22,7 +21,7 @@ export default async function ProfilePage() {
 
 	return (
 		<main className="flex flex-col items-center min-h-screen">
-			<Image alt="colombicultura" src="/colombicultura.png" width={200} height={200} />
+			<Image alt="colombicultura" src="/colombicultura.png" width={200} height={200} priority/>
 			<div className="container m-4">
 				<div className="max-w-3xl w-full mx-auto grid gap-4 grid-cols-1">
 					<Card>
@@ -35,7 +34,7 @@ export default async function ProfilePage() {
 							</Card>
 						</div>
 						<div className="col-span-12 sm:col-span-4">
-							<Card>
+							<Card href='/profile/catches'>
 								<p>Capturas</p>
 							</Card>
 						</div>
