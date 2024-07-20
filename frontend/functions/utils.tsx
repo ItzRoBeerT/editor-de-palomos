@@ -20,6 +20,13 @@ export function getFemalePigeons(pigeons: Pigeon[]) {
 		));
 }
 
+export function getGenders() {
+	return [
+		<option key={'male'} value={'male'}>Macho</option>,
+		<option key={'female'} value={'female'}>Hembra</option>
+	]
+}
+
 export function getUri() {
 	if (process.env.NEXT_PUBLIC_ENV === 'DEVELOP') {
 		console.log('DEVELOP MODE');
