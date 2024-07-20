@@ -39,9 +39,7 @@ export default function EditPigeon(props: Props) {
 				) : (
 					<Image src="/female.svg" alt="female" width={32} height={32} />
 				)}
-				<h1 className="text-4xl w-full">
-					{pigeonName} de {user.name}
-				</h1>
+				<h1 className="text-4xl w-full">{pigeonName}</h1>
 				<div onClick={handleMode}>
 					<Image src={'/edit.svg'} alt="edit" width={32} height={32} />
 				</div>
