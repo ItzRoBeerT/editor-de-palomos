@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function PigeonFormPage() {
 	const token = cookies().get('token')?.value || '';
-	const pigeons = await getPigeons(token);
+	const { pigeons } = await getPigeons(token);
 
 	return (
 		<main>

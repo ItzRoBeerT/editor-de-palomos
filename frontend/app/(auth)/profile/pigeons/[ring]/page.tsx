@@ -15,7 +15,7 @@ export default async function Pigeon(props: Props) {
 	const token = cookies().get('token')?.value || '';
 	const user = await getUser(token);
 	const pigeon = await getPigeon(token, ring);
-	const pigeons = await getPigeons(token);
+	const { pigeons } = await getPigeons(token);
 
 	return (
 		<main>

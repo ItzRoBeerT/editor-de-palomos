@@ -65,7 +65,7 @@ router.get('/user/getPigeons', auth, async (req, res) => {
 		const pigeons = await Pigeon.find({
 			userId: userId,
 		}).exec();
-		res.status(200).send({ pigeons });
+		res.status(200).send({ pigeons, total: pigeons.length });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
