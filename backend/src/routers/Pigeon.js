@@ -67,6 +67,42 @@ router.patch('/pigeon/update', auth, async (req, res) => {
 	}
 });
 
+router.post('/pigeon/capture', auth, async (req, res) => {
+	const { pigeonId, year, captures } = req.body;
+
+	try {
+		const pigeon = await Pigeon.findById(pigeonId);
+		if (!pigeon) return res.status(404).send({ message: 'El palomo no fue encontrado' });
+
+		const captureIndex = pigeon.captures.findIndex((capture) => capture.year === year);
+
+		if (captureIndex !== -1) {
+			pigeon.captures[captureIndex].captures = captures;
+		} else {
+			pigeon.captures.push({ year, captures });
+		}
+		await pigeon.save();
+		res.status(200).send(pigeon);
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.get('/pigeon/:pigeonId/captures/:year', auth, async (req, res) => {
+	const { pigeonId, year } = req.params;
+
+	try {
+		const pigeon = await Pigeon.findById(pigeonId);
+		if(!pigeon) res.status(404).send('El palomo no fue encontrado');
+
+		const captures = pigeon.captures.find(capture => capture.year === parseInt(year));
+		res.status(200).send({captures: captures})
+
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
 router.delete('/pigeon/delete', auth, async (req, res) => {
 	try {
 		const pigeonRing = req.body.ring;
@@ -100,7 +136,7 @@ router.delete('/pigeon/delete', auth, async (req, res) => {
 
 		await Pigeon.deleteOne({ ring: pigeonRing });
 
-		res.status(200).send({message: 'Palomo eliminado exitosamente.'});
+		res.status(200).send({ message: 'Palomo eliminado exitosamente.' });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
