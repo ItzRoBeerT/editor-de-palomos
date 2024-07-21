@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
+const captureSchema = new mongoose.Schema({
+	year: Number,
+	captures: {
+		type: Number,
+		default: 0,
+	},
+});
+
 const pigeonSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -35,6 +43,11 @@ const pigeonSchema = new mongoose.Schema({
 		required: false,
 		trim: true,
 	},
+	inCompetition: {
+		type: Boolean,
+		default: false,
+	},
+	captures: [captureSchema],
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,

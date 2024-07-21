@@ -58,8 +58,12 @@ export async function getPigeons(token: string) {
 		throw new Error(`HTTP error! Status: ${response.status}`);
 	}
 
-	const data = await response.json();
-	const pigeons: Pigeon[] = data.pigeons;
+	interface DataResponse {
+		pigeons: [];
+		total: number;
+	}
 
-	return pigeons;
+	const data: DataResponse = await response.json();
+
+	return data;
 }

@@ -12,10 +12,12 @@ export const metadata: Metadata = {
 export default async function PigeonsPage() {
 	const token = cookies().get('token')?.value || '';
 
-	const pigeons = await getPigeons(token);
+	const { pigeons, total } = await getPigeons(token);
 	return (
 		<main>
 			<h1 className="text-center text-4xl">Mis palomos</h1>
+			<p>Palomos: {total}</p>
+
 			<div className="flex flex-col gap-3 mt-3">
 				<PigeonsDisplay token={token} pigeons={pigeons} />
 			</div>

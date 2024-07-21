@@ -3,6 +3,7 @@ import Card from '../../containers/card';
 import Image from 'next/image';
 import moment from 'moment';
 import FormDelete from '@/components/forms/form-delete';
+import Switch from '@/components/ui/switch';
 
 export interface Props {
 	pigeon: Pigeon;
@@ -18,7 +19,6 @@ export default function ViewPigeon(props: Props) {
 	function handleMode() {
 		onHandleMode();
 	}
-
 	return (
 		<div className="gap-4 grid">
 			<Card className="flex items-start text-center">
@@ -53,6 +53,7 @@ export default function ViewPigeon(props: Props) {
 					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
+			<Switch />
 			<FormDelete pigeon={pigeon} token={token} />
 		</div>
 	);
