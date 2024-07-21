@@ -2,9 +2,10 @@
 import { Pigeon } from '@/types/request';
 import FormSubmit from './form-submit';
 import { useFormState } from 'react-dom';
-import { modifyPigeon, removePigeon } from '@/actions/pigeon';
+import { removePigeon } from '@/actions/pigeon';
 import { useState } from 'react';
 import Modal from '../containers/modal';
+import toast from 'react-hot-toast';
 
 export interface Props {
 	pigeon: Pigeon;
@@ -13,8 +14,16 @@ export interface Props {
 
 export default function FormDelete(props: Props) {
 	const { token, pigeon } = props;
-	const [state, formAction] = useFormState(removePigeon.bind(null, token, pigeon.ring), {});
+	const [state, formAction] = useFormState(removePigeon.bind(null, token, pigeon.ring), {
+		errors: {},
+	});
 	const [isOpen, setIsOpen] = useState(false);
+
+	if (state?.errors?.response) {
+		toast.error(state.errors.response, {
+			duration: 2000,
+		});
+	}
 	return (
 		<>
 			<Modal

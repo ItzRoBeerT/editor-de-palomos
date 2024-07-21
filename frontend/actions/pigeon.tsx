@@ -112,8 +112,14 @@ export async function modifyPigeon(token: string, prevState: any, formData: Form
 }
 
 export async function removePigeon(token: string, ring: string) {
-	await deletePigeon(token, ring);
+	const errors: Errors = {};
+	try {
+		await deletePigeon(token, ring);
+	} catch (error) {
+		console.error('Error adding pigeon:', error);
+		errors.response = 'Error al añadir el palomo';
+		return { errors };
+	}
 	revalidatePath('/');
-	redirect('/profile');
-	return {};
+	redirect('/profile/pigeons')
 }
