@@ -13,4 +13,5 @@ export type Pigeon = {
 	birthday: string;
 	father?: string;
 	mother?: string;
+	isCatching?: boolean;
 };

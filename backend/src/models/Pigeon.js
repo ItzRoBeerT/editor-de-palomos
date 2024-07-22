@@ -43,7 +43,7 @@ const pigeonSchema = new mongoose.Schema({
 		required: false,
 		trim: true,
 	},
-	inCompetition: {
+	isCatching: {
 		type: Boolean,
 		default: false,
 	},

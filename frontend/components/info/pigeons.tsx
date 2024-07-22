@@ -3,6 +3,7 @@ import Card from '../containers/card';
 import { useState } from 'react';
 import { Pigeon } from '@/types/request';
 import SearchInput from '../ui/searchInput';
+import Pill from '../ui/pill';
 
 export interface Props {
 	token: string;
@@ -21,12 +22,17 @@ export default function PigeonsDisplay(props: Props) {
 			{pigeons.length > 0 ? (
 				pigeons.map((pigeon) => (
 					<Card key={pigeon.ring} href={`pigeons/${pigeon.ring}`}>
-						{pigeon.name ? (
-							<p>Nombre: {pigeon.name}</p>
-						) : (
-							<p>Pluma: {pigeon.feather}</p>
-						)}
-						<p>Anilla: {pigeon.ring}</p>
+						<div className='flex justify-between items-center'>
+							<div>
+								{pigeon.name ? (
+									<p>Nombre: {pigeon.name}</p>
+								) : (
+									<p>Pluma: {pigeon.feather}</p>
+								)}
+								<p>Anilla: {pigeon.ring}</p>
+							</div>
+							{pigeon?.isCatching && <Pill text="Embreo" />}
+						</div>
 					</Card>
 				))
 			) : (
