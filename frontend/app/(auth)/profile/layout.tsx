@@ -1,3 +1,4 @@
+import Header from '@/components/header';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -11,5 +12,10 @@ export default function AuthRootLayout({
 		return redirect('/');
 	}
 
-	return <>{children}</>;
+	return (
+		<>
+			<Header />
+			{children}
+		</>
+	);
 }

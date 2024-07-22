@@ -10,7 +10,7 @@ export default function AuthForm() {
 	return (
 		<Card>
 			<form className="max-w-sm mx-auto" action={formAction}>
-				<h2 className="text-5xl text-center mb-6">Inicio de sesión</h2>
+				<h2 className="text-3xl text-center mb-6">Inicio de sesión</h2>
 				<div className="mb-5">
 					<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 						Tu email

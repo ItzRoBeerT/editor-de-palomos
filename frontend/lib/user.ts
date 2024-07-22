@@ -25,6 +25,22 @@ export async function loginUser(email: string, password: string) {
 	cookies().set('token', data.token);
 }
 
+export async function logoutUser(token: string) {
+	const response = await fetch(URI + 'user/logout', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return true;
+}
+
 export async function getUser(token: string) {
 	const response = await fetch(URI + 'user/me', {
 		method: 'GET',
