@@ -1,5 +1,5 @@
 'use server';
-import { addPigeon, deletePigeon, updatePigeon } from '@/lib/pigeon';
+import { addPigeon, deletePigeon, handleCatching, updatePigeon } from '@/lib/pigeon';
 import { Pigeon } from '@/types/request';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -121,5 +121,28 @@ export async function removePigeon(token: string, ring: string) {
 		return { errors };
 	}
 	revalidatePath('/');
-	redirect('/profile/pigeons')
+	redirect('/profile/pigeons');
+}
+
+export async function toogleCatches(token: string, pigeon: Pigeon) {
+	const { isCatching } = pigeon;
+	if (isCatching) {
+		try {
+			await handleCatching(token, pigeon);
+			revalidatePath('/', 'layout');
+			return { success: 'Palomo añadido a embreo!' };
+		} catch (error) {
+			console.error(error);
+			return { error: 'No se ha podido actualizar el palomo' };
+		}
+	} else {
+		try {
+			await handleCatching(token, pigeon);
+			revalidatePath('/', 'layout');
+			return { success: 'Palomo eliminado de embreo!' };
+		} catch (error) {
+			console.error(error);
+			return { error: 'No se ha podido actualizar el palomo' };
+		}
+	}
 }

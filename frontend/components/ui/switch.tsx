@@ -1,10 +1,35 @@
 'use client';
 
-export default function Switch() {
-	function onChangeHandler(e: any) {
+import { toogleCatches } from '@/actions/pigeon';
+import { Pigeon } from '@/types/request';
+import toast from 'react-hot-toast';
+
+export interface SwitchProps {
+	token: string;
+	pigeon: Pigeon;
+}
+
+export default function Switch(props: SwitchProps) {
+	const { token, pigeon } = props;
+
+	async function onChangeHandler(e: any) {
 		const isChecked = e.target.checked;
-		if (isChecked) {
-			//añadir embreo
+
+		const updatedPigeon = {
+			...pigeon,
+			isCatching: isChecked,
+		};
+
+		const res = await toogleCatches(token, updatedPigeon);
+
+		if (res.success) {
+			toast.success(res.success, {
+				duration: 2000,
+			});
+		} else if (res.error) {
+			toast.error(res.error, {
+				duration: 2000,
+			});
 		}
 	}
 

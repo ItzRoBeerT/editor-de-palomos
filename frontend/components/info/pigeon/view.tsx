@@ -53,7 +53,7 @@ export default function ViewPigeon(props: Props) {
 					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
-			<Switch />
+			<Switch token={token} pigeon={pigeon}/>
 			<FormDelete pigeon={pigeon} token={token} />
 		</div>
 	);

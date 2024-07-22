@@ -94,3 +94,22 @@ export async function deletePigeon(token: string, ring: string) {
 
 	return response.json();
 }
+
+export async function handleCatching(token: string, pigeon: Pigeon) {
+	console.log({pigeon});
+	
+	const response = await fetch(URI + 'pigeon/update', {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ pigeon }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
+}
