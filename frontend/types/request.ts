@@ -6,6 +6,7 @@ export type User = {
 };
 
 export type Pigeon = {
+	_id?: string;
 	name: string;
 	ring: string;
 	gender: 'male' | 'female' | string;

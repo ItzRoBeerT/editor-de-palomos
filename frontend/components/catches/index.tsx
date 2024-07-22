@@ -1,5 +1,5 @@
-import Pigeons from '@/app/(auth)/profile/catches/pigeons';
 import { Pigeon } from '@/types/request';
+import Pigeons from './pigeons';
 
 export interface CatchesProps {
 	pigeons: Pigeon[];
