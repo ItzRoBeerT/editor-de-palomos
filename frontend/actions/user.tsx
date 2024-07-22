@@ -1,5 +1,6 @@
 'use server';
-import { loginUser } from '@/lib/user';
+import { loginUser, logoutUser } from '@/lib/user';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 interface Errors {
@@ -29,4 +30,16 @@ export async function login(prevState: any, formData: FormData) {
 		console.error('Error fetching data:', error);
 	}
 	redirect('/profile');
+}
+
+export async function logout() {
+	const token = cookies().get('token')?.value || '';
+
+	try {
+		await logoutUser(token);
+		cookies().delete('token');
+		redirect('/');
+	} catch (error) {
+		console.error('Error fetching data:', error);
+	}
 }

@@ -4,14 +4,13 @@ const Pigeon = require('../models/Pigeon');
 const auth = require('../middleware/auth');
 const router = new express.Router();
 
-
 router.get('/test', async (req, res) => {
 	try {
-		res.status(200).send({message: 'Test para el editor de palomos!'})
+		res.status(200).send({ message: 'Test para el editor de palomos!' });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
-})
+});
 
 router.post('/user/createAccount', async (req, res) => {
 	const user = new User(req.body);
@@ -65,7 +64,16 @@ router.get('/user/getPigeons', auth, async (req, res) => {
 		const pigeons = await Pigeon.find({
 			userId: userId,
 		}).exec();
-		res.status(200).send({ pigeons, total: pigeons.length });
+		const isCatchingPigeons = await Pigeon.find({
+			userId: userId,
+			isCatching: true,
+		});
+		res.status(200).send({
+			pigeons,
+			total: pigeons.length,
+			isCatchingPigeons: isCatchingPigeons,
+			isCatchingTotal: isCatchingPigeons.length,
+		});
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
