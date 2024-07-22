@@ -12,11 +12,11 @@ export default function Header() {
 		<header>
 			<Card className="flex justify-between text-center mb-4">
 				<Link href={'/profile'}>
-					<div className="bg-gray-500 p-4 rounded">
+					<div className="bg-gray-500 p-2 rounded">
 						<p>Inicio</p>
 					</div>
 				</Link>
-				<button onClick={onClickHandler} className="bg-red-700 p-4 rounded">
+				<button onClick={onClickHandler} className="bg-red-700 p-2 rounded">
 					<p>Cerrar sesión</p>
 				</button>
 			</Card>
