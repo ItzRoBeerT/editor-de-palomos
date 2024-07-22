@@ -64,14 +64,15 @@ router.get('/user/getPigeons', auth, async (req, res) => {
 		const pigeons = await Pigeon.find({
 			userId: userId,
 		}).exec();
-		const pigeonsInCatching = await Pigeon.find({
+		const isCatchingPigeons = await Pigeon.find({
 			userId: userId,
 			isCatching: true,
 		});
 		res.status(200).send({
 			pigeons,
 			total: pigeons.length,
-			isCatchingTotal: pigeonsInCatching.length,
+			isCatchingPigeons: isCatchingPigeons,
+			isCatchingTotal: isCatchingPigeons.length,
 		});
 	} catch (error) {
 		res.status(500).send({ error: error.message });

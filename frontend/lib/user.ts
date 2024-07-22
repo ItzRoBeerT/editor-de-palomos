@@ -75,8 +75,9 @@ export async function getPigeons(token: string) {
 	}
 
 	interface DataResponse {
-		pigeons: [];
+		pigeons: Pigeon[];
 		total: number;
+		isCatchingPigeons: Pigeon[];
 		isCatchingTotal: number;
 	}
 
