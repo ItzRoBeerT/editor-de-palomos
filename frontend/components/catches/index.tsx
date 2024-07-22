@@ -1,18 +1,22 @@
 import { Pigeon } from '@/types/request';
 import Pigeons from './pigeons';
+import { getYears } from '@/functions/utils';
 
 export interface CatchesProps {
 	pigeons: Pigeon[];
+	token: string;
 }
 
-export default function Catches(props: CatchesProps) {
-	const { pigeons } = props;
+export default async function Catches(props: CatchesProps) {
+	const { pigeons, token } = props;
+	const years = await getYears(token);
+
 	return (
 		<>
-			<h1>Bienvenido a la página de cpaturas</h1>˝{' '}
-			<p>Esta página se encuentra todavía en desarrollo!!!</p>
+			<select></select>
+
 			{pigeons.length > 0 ? (
-				<Pigeons pigeons={pigeons} />
+				<Pigeons pigeons={pigeons} years={years} />
 			) : (
 				<p>Todavia no tienes palomos en embreo</p>
 			)}

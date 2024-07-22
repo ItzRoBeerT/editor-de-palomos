@@ -96,8 +96,6 @@ export async function deletePigeon(token: string, ring: string) {
 }
 
 export async function handleCatching(token: string, pigeon: Pigeon) {
-	console.log({pigeon});
-	
 	const response = await fetch(URI + 'pigeon/update', {
 		method: 'PATCH',
 		headers: {
@@ -112,4 +110,24 @@ export async function handleCatching(token: string, pigeon: Pigeon) {
 	}
 
 	return response.json();
+}
+
+export async function getAvailableYears(token: string) {
+	const response = await fetch(URI + 'pigeon/years', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	interface data {
+		years: number[];
+	}
+	const data: data = await response.json();
+	return data.years;
 }

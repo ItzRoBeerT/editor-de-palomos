@@ -1,4 +1,6 @@
+import { getAvailableYears } from '@/lib/pigeon';
 import { Pigeon } from '@/types/request';
+import moment from 'moment';
 
 export function getMalePigeons(pigeons: Pigeon[]) {
 	return pigeons
@@ -16,6 +18,18 @@ export function getGenders() {
 		{ value: 'male', label: 'Macho' },
 		{ value: 'female', label: 'Hembra' },
 	];
+}
+
+export async function getYears(token: string) {
+	const currentYear = moment().year();
+	const years = await getAvailableYears(token);
+
+	if (years.includes(currentYear)) {
+		return years;
+	} else {
+		years.push(currentYear);
+		return years;
+	}
 }
 
 export function getUri() {

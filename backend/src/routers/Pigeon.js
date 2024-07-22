@@ -93,12 +93,35 @@ router.get('/pigeon/:pigeonId/captures/:year', auth, async (req, res) => {
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
-		if(!pigeon) res.status(404).send('El palomo no fue encontrado');
+		if (!pigeon) res.status(404).send('El palomo no fue encontrado');
 
-		const captures = pigeon.captures.find(capture => capture.year === parseInt(year));
-		res.status(200).send({captures: captures})
-
+		const captures = pigeon.captures.find((capture) => capture.year === parseInt(year));
+		res.status(200).send({ captures: captures });
 	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.get('/pigeon/years', auth, async (req, res) => {
+	const user = req.user;
+	try {
+		const pigeons = await Pigeon.find({
+			userId: user._id,
+		});
+
+		const years = new Set();
+
+		pigeons.forEach((pigeon) => {
+			pigeon.captures.forEach((capture) => {
+				years.add(capture.year);
+			});
+		});
+
+		const uniqueYears = Array.from(years).sort((a, b) => a - b);
+
+		res.status(200).send({ years: uniqueYears });
+	} catch (error) {
+		console.log(error);
 		res.status(500).send({ error: error.message });
 	}
 });

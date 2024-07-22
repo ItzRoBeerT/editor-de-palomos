@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default async function CatchesPage() {
 	const token = cookies().get('token')?.value || '';
-	const {isCatchingPigeons} = await getPigeons(token);
+	const { isCatchingPigeons } = await getPigeons(token);
 
 	return (
 		<main>
-			<Catches pigeons={isCatchingPigeons}/>
+			<Catches pigeons={isCatchingPigeons} token={token} />
 		</main>
 	);
 }

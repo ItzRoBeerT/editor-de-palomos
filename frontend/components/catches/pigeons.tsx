@@ -4,11 +4,10 @@ import { Pigeon } from '@/types/request';
 
 interface PigeonsProps {
 	pigeons: Pigeon[];
+	years: number[];
 }
 export default function Pigeons(props: PigeonsProps) {
-	const { pigeons } = props;
-
-	console.log({ pigeons });
+	const { pigeons, years } = props;
 
 	return pigeons.map((pigeon) => (
 		<Card key={pigeon._id}>
