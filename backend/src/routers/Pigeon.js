@@ -112,7 +112,8 @@ router.get('/pigeon/years', auth, async (req, res) => {
 
 		pigeons.forEach((pigeon) => {
 			pigeon.captures.forEach((capture) => {
-				years.add(capture.year);
+				const captureYear = new Date(capture.date).getFullYear();
+				years.add(captureYear);
 			});
 		});
 

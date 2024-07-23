@@ -12,7 +12,6 @@ export interface CatchesProps {
 export default function Catches(props: CatchesProps) {
 	const { pigeons, token, years } = props;
 	const [year, setYear] = useState(years[years.length - 1]);
-	console.log(pigeons);
 
 	return (
 		<>
