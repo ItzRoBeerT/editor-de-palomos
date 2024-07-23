@@ -1,5 +1,6 @@
 import Catches from '@/components/catches';
-import { getPigeons } from '@/lib/user';
+import Card from '@/components/containers/card';
+import { getYears } from '@/functions/utils';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
@@ -11,11 +12,14 @@ export const metadata: Metadata = {
 
 export default async function CatchesPage() {
 	const token = cookies().get('token')?.value || '';
-	const {isCatchingPigeons} = await getPigeons(token);
+	const years = await getYears(token);
 
 	return (
 		<main>
-			<Catches pigeons={isCatchingPigeons}/>
+			<Card className="mb-4">
+				<h1 className="text-4xl text-center">Capturas</h1>
+			</Card>
+			<Catches token={token} years={years} />
 		</main>
 	);
 }

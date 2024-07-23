@@ -1,10 +1,24 @@
 const mongoose = require('mongoose');
 
 const captureSchema = new mongoose.Schema({
-	year: Number,
-	captures: {
-		type: Number,
-		default: 0,
+	date: {
+		type: Date,
+		required: true,
+	},
+	owner: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	ring: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	feather: {
+		type: String,
+		required: true,
+		trim: true,
 	},
 });
 

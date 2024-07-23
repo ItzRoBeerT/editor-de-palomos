@@ -15,4 +15,12 @@ export type Pigeon = {
 	father?: string;
 	mother?: string;
 	isCatching?: boolean;
+	captures?: Capture[];
+};
+
+export type Capture = {
+	date: string;
+	owner: string;
+	feather: string;
+	ring: string;
 };

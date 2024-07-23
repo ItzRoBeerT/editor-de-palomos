@@ -1,5 +1,5 @@
 import { getUri } from '@/functions/utils';
-import { Pigeon } from '@/types/request';
+import { Capture, Pigeon } from '@/types/request';
 
 const URI = getUri();
 
@@ -96,8 +96,6 @@ export async function deletePigeon(token: string, ring: string) {
 }
 
 export async function handleCatching(token: string, pigeon: Pigeon) {
-	console.log({pigeon});
-	
 	const response = await fetch(URI + 'pigeon/update', {
 		method: 'PATCH',
 		headers: {
@@ -112,4 +110,61 @@ export async function handleCatching(token: string, pigeon: Pigeon) {
 	}
 
 	return response.json();
+}
+
+export async function addNewCapture(token: string, pigeonId: string, capture: Capture) {
+	const response = await fetch(URI + 'pigeon/capture', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ pigeonId, capture }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
+}
+
+export async function getAvailableYears(token: string) {
+	const response = await fetch(URI + 'pigeon/years', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	interface data {
+		years: number[];
+	}
+	const data: data = await response.json();
+	return data.years;
+}
+export async function getCatchingPigeons(token: string, gender: 'male' | 'female') {
+	const response = await fetch(URI + 'user/getCatchingPigeons', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ gender }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	interface DataResponse {
+		pigeons: Pigeon[];
+	}
+	const data: DataResponse = await response.json();
+	return data;
 }

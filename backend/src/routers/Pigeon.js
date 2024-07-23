@@ -68,19 +68,18 @@ router.patch('/pigeon/update', auth, async (req, res) => {
 });
 
 router.post('/pigeon/capture', auth, async (req, res) => {
-	const { pigeonId, year, captures } = req.body;
+	const { pigeonId, capture } = req.body;
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
 		if (!pigeon) return res.status(404).send({ message: 'El palomo no fue encontrado' });
 
-		const captureIndex = pigeon.captures.findIndex((capture) => capture.year === year);
-
-		if (captureIndex !== -1) {
-			pigeon.captures[captureIndex].captures = captures;
-		} else {
-			pigeon.captures.push({ year, captures });
+		if (!capture || !capture.date || !capture.owner || !capture.ring || !capture.feather) {
+			return res.status(400).send({ message: 'Faltan campos en la captura' });
 		}
+
+		pigeon.captures.push(capture);
+
 		await pigeon.save();
 		res.status(200).send(pigeon);
 	} catch (error) {
@@ -93,12 +92,36 @@ router.get('/pigeon/:pigeonId/captures/:year', auth, async (req, res) => {
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
-		if(!pigeon) res.status(404).send('El palomo no fue encontrado');
+		if (!pigeon) res.status(404).send('El palomo no fue encontrado');
 
-		const captures = pigeon.captures.find(capture => capture.year === parseInt(year));
-		res.status(200).send({captures: captures})
-
+		const captures = pigeon.captures.find((capture) => capture.year === parseInt(year));
+		res.status(200).send({ captures: captures });
 	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.get('/pigeon/years', auth, async (req, res) => {
+	const user = req.user;
+	try {
+		const pigeons = await Pigeon.find({
+			userId: user._id,
+		});
+
+		const years = new Set();
+
+		pigeons.forEach((pigeon) => {
+			pigeon.captures.forEach((capture) => {
+				const captureYear = new Date(capture.date).getFullYear();
+				years.add(captureYear);
+			});
+		});
+
+		const uniqueYears = Array.from(years).sort((a, b) => a - b);
+
+		res.status(200).send({ years: uniqueYears });
+	} catch (error) {
+		console.log(error);
 		res.status(500).send({ error: error.message });
 	}
 });

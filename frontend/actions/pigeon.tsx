@@ -1,6 +1,6 @@
 'use server';
-import { addPigeon, deletePigeon, handleCatching, updatePigeon } from '@/lib/pigeon';
-import { Pigeon } from '@/types/request';
+import { addNewCapture, addPigeon, deletePigeon, handleCatching, updatePigeon } from '@/lib/pigeon';
+import { Capture, Pigeon } from '@/types/request';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -122,6 +122,57 @@ export async function removePigeon(token: string, ring: string) {
 	}
 	revalidatePath('/');
 	redirect('/profile/pigeons');
+}
+
+export async function addCapture(
+	token: string,
+	pigeonId: string,
+	prevState: any,
+	formData: FormData
+) {
+	const owner = formData.get('owner');
+	const ring = formData.get('ring');
+	const feather = formData.get('feather');
+	const date = formData.get('date');
+
+	let errors: Errors = {};
+	if (!ring) {
+		errors.ring = 'La anilla es obligatoria';
+	}
+
+	if (!feather) {
+		errors.ring = 'La pluma es obligatoria';
+	}
+
+	if (!date) {
+		errors.date = 'La fecha es obligatoria';
+	}
+
+	if (!owner) {
+		errors.owner = 'El propietario es obligatorio';
+	}
+
+	if (Object.keys(errors).length > 0) {
+		return { errors };
+	}
+
+	const newCapture: Capture = {
+		owner: owner as string,
+		date: date as string,
+		feather: feather as string,
+		ring: ring as string,
+	};
+
+	try {
+		await addNewCapture(token, pigeonId, newCapture);
+	} catch (error) {
+		console.error('Error adding pigeon:', error);
+		errors.response = 'Error al añadir captura';
+		return { errors };
+	}
+
+	revalidatePath('/', 'layout');
+	return { success: true };
 }
 
 export async function toogleCatches(token: string, pigeon: Pigeon) {

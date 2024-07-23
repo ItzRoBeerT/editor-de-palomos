@@ -79,4 +79,21 @@ router.get('/user/getPigeons', auth, async (req, res) => {
 	}
 });
 
+router.post('/user/getCatchingPigeons', auth, async (req, res) => {
+	try {
+		const userId = req.user._id;
+		const gender = req.body.gender;
+
+		const pigeons = await Pigeon.find({
+			userId: userId,
+			gender: gender,
+			isCatching: true,
+		});
+
+		res.status(200).send({ pigeons });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
 module.exports = router;
