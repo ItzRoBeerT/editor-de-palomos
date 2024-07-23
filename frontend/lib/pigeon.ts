@@ -1,5 +1,5 @@
 import { getUri } from '@/functions/utils';
-import { Pigeon } from '@/types/request';
+import { Capture, Pigeon } from '@/types/request';
 
 const URI = getUri();
 
@@ -103,6 +103,23 @@ export async function handleCatching(token: string, pigeon: Pigeon) {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({ pigeon }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
+}
+
+export async function addNewCapture(token: string, pigeonId: string, capture: Capture) {
+	const response = await fetch(URI + 'pigeon/capture', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ pigeonId, capture }),
 	});
 
 	if (!response.ok) {
