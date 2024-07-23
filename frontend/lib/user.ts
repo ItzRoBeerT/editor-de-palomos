@@ -2,7 +2,7 @@ import { getUri } from '@/functions/utils';
 import { Pigeon, User } from '@/types/request';
 import { cookies } from 'next/headers';
 
-const URI = getUri();
+let URI = getUri();
 
 export async function loginUser(email: string, password: string) {
 	const userCredentials = {
@@ -85,3 +85,5 @@ export async function getPigeons(token: string) {
 
 	return data;
 }
+
+

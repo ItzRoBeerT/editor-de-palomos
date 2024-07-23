@@ -13,7 +13,9 @@ export default function Pigeons(props: PigeonsProps) {
 
 	return pigeons.map((pigeon) => (
 		<Card key={pigeon._id} className="grid grid-cols-3 items-center">
-			<p>{pigeon.name ? pigeon.name : pigeon.ring} </p>
+			<div>
+				<p>Anilla: {pigeon.ring}</p>
+			</div>
 			<p>Capturas: {pigeon.captures?.length}</p>
 			<AddCatchButton pigeonId={pigeon._id || ''} token={token} />
 		</Card>
