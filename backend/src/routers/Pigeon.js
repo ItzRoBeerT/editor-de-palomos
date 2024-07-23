@@ -68,19 +68,18 @@ router.patch('/pigeon/update', auth, async (req, res) => {
 });
 
 router.post('/pigeon/capture', auth, async (req, res) => {
-	const { pigeonId, year, captures } = req.body;
+	const { pigeonId, capture } = req.body;
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
 		if (!pigeon) return res.status(404).send({ message: 'El palomo no fue encontrado' });
 
-		const captureIndex = pigeon.captures.findIndex((capture) => capture.year === year);
-
-		if (captureIndex !== -1) {
-			pigeon.captures[captureIndex].captures = captures;
-		} else {
-			pigeon.captures.push({ year, captures });
+		if (!capture || !capture.date || !capture.owner || !capture.ring || !capture.feather) {
+			return res.status(400).send({ message: 'Faltan campos en la captura' });
 		}
+
+		pigeon.captures.push(capture);
+
 		await pigeon.save();
 		res.status(200).send(pigeon);
 	} catch (error) {
