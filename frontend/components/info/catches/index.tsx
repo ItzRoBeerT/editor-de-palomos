@@ -26,7 +26,9 @@ export default function Catches(props: CatchesProps) {
 
 	return (
 		<div>
-			<YearSelect years={years} onSetYear={setYear} />
+			<div className="mb-4">
+				<YearSelect years={years} onSetYear={setYear} />
+			</div>
 			<Captures captures={captures} />
 		</div>
 	);

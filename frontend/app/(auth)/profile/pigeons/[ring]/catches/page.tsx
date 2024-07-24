@@ -1,3 +1,4 @@
+import Card from '@/components/containers/card';
 import Catches from '@/components/info/catches';
 import { getYears } from '@/functions/utils';
 import { getPigeon } from '@/lib/pigeon';
@@ -11,7 +12,9 @@ export default async function CatchesPage(props: any) {
 
 	return (
 		<main>
-			<h1>Página de capturas</h1>
+			<Card className="mb-4">
+				<h1 className="text-4xl text-center">Mis capturas</h1>
+			</Card>
 			<Catches token={token} years={years} pigeonId={pigeon._id || ''} />
 		</main>
 	);
