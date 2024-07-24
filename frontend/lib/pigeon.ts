@@ -189,3 +189,20 @@ export async function getCaptures(token: string, pigeonId: string, year: number)
 	const data: Data = await response.json();
 	return data;
 }
+
+export async function deleteCapture(token: string, pigeonId: string, captureId: string) {
+	const response = await fetch(URI + 'pigeon/deleteCapture', {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ pigeonId, captureId }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	return response.json();
+}

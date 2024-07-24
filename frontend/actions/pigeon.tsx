@@ -1,5 +1,12 @@
 'use server';
-import { addNewCapture, addPigeon, deletePigeon, handleCatching, updatePigeon } from '@/lib/pigeon';
+import {
+	addNewCapture,
+	addPigeon,
+	deleteCapture,
+	deletePigeon,
+	handleCatching,
+	updatePigeon,
+} from '@/lib/pigeon';
 import { Capture, Pigeon } from '@/types/request';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -122,6 +129,25 @@ export async function removePigeon(token: string, ring: string) {
 	}
 	revalidatePath('/');
 	redirect('/profile/pigeons');
+}
+
+export async function removeCaptureAction(
+	token: string,
+	pigeonId: string,
+	captureId: string,
+	prevState: any,
+	formData: FormData
+) {
+	const errors: Errors = {};
+	try {
+		await deleteCapture(token, pigeonId, captureId);
+	} catch (error) {
+		console.error('Error adding pigeon:', error);
+		errors.response = 'Error al eliminar captura';
+		return { errors };
+	}
+	revalidatePath('/');
+	return { success: 'Captura eliminada' };
 }
 
 export async function addCapture(

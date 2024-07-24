@@ -29,7 +29,7 @@ export default function Catches(props: CatchesProps) {
 			<div className="mb-4">
 				<YearSelect years={years} onSetYear={setYear} />
 			</div>
-			<Captures captures={captures} />
+			<Captures captures={captures} pigeonId={pigeonId} token={token} />
 		</div>
 	);
 }

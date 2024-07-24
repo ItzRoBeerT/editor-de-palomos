@@ -5,15 +5,21 @@ import RemoveCapture from './remove-capture';
 
 interface CapturesProps {
 	captures: Capture[];
+	pigeonId: string;
+	token: string;
 }
 export default function Captures(props: CapturesProps) {
-	const { captures } = props;
+	const { captures, pigeonId, token } = props;
 	return (
 		<div>
 			{captures.map((capture) => (
 				<Card key={capture._id}>
 					<div className="flex justify-end">
-						<RemoveCapture />
+						<RemoveCapture
+							token={token}
+							pigeonId={pigeonId}
+							captureId={capture._id || ''}
+						/>
 					</div>
 					<div>
 						<p>Propietario: {capture.owner}</p>
