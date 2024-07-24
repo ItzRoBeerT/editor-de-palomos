@@ -38,7 +38,7 @@ export default function Catches(props: CatchesProps) {
 					<Pigeons pigeons={pigeons} years={years} token={token} />
 				</div>
 			) : (
-				<p>Todavia no tienes palomos en embreo</p>
+				<p>Todavia no tienes palomos en hembreo</p>
 			)}
 		</>
 	);

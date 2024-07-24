@@ -181,7 +181,7 @@ export async function toogleCatches(token: string, pigeon: Pigeon) {
 		try {
 			await handleCatching(token, pigeon);
 			revalidatePath('/', 'layout');
-			return { success: 'Palomo añadido a embreo!' };
+			return { success: 'Palomo añadido a hembreo!' };
 		} catch (error) {
 			console.error(error);
 			return { error: 'No se ha podido actualizar el palomo' };
@@ -190,7 +190,7 @@ export async function toogleCatches(token: string, pigeon: Pigeon) {
 		try {
 			await handleCatching(token, pigeon);
 			revalidatePath('/', 'layout');
-			return { success: 'Palomo eliminado de embreo!' };
+			return { success: 'Palomo eliminado de hembreo!' };
 		} catch (error) {
 			console.error(error);
 			return { error: 'No se ha podido actualizar el palomo' };

@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 export const metadata: Metadata = {
 	title: 'Capturas',
 	description:
-		'Aquí puedes ver todos tus palomos de embreo que estan concursando. Puedes filtrar por año. Además también puedes consultar la puntucación total de capturas.',
+		'Aquí puedes ver todos tus palomos de hembreo que estan concursando. Puedes filtrar por año. Además también puedes consultar la puntucación total de capturas.',
 };
 
 export default async function CatchesPage() {

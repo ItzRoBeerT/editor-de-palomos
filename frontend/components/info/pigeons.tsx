@@ -31,7 +31,7 @@ export default function PigeonsDisplay(props: Props) {
 								)}
 								<p>Anilla: {pigeon.ring}</p>
 							</div>
-							{pigeon?.isCatching && <Pill text="Embreo" />}
+							{pigeon?.isCatching && <Pill text="Hembreo" />}
 						</div>
 					</Card>
 				))
