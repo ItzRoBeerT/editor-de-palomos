@@ -1,5 +1,12 @@
 'use server';
-import { addNewCapture, addPigeon, deletePigeon, handleCatching, updatePigeon } from '@/lib/pigeon';
+import {
+	addNewCapture,
+	addPigeon,
+	deleteCapture,
+	deletePigeon,
+	handleCatching,
+	updatePigeon,
+} from '@/lib/pigeon';
 import { Capture, Pigeon } from '@/types/request';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -124,6 +131,25 @@ export async function removePigeon(token: string, ring: string) {
 	redirect('/profile/pigeons');
 }
 
+export async function removeCaptureAction(
+	token: string,
+	pigeonId: string,
+	captureId: string,
+	prevState: any,
+	formData: FormData
+) {
+	const errors: Errors = {};
+	try {
+		await deleteCapture(token, pigeonId, captureId);
+	} catch (error) {
+		console.error('Error adding pigeon:', error);
+		errors.response = 'Error al eliminar captura';
+		return { errors };
+	}
+	revalidatePath('/');
+	return { success: 'Captura eliminada' };
+}
+
 export async function addCapture(
 	token: string,
 	pigeonId: string,
@@ -181,7 +207,7 @@ export async function toogleCatches(token: string, pigeon: Pigeon) {
 		try {
 			await handleCatching(token, pigeon);
 			revalidatePath('/', 'layout');
-			return { success: 'Palomo añadido a embreo!' };
+			return { success: 'Palomo añadido a hembreo!' };
 		} catch (error) {
 			console.error(error);
 			return { error: 'No se ha podido actualizar el palomo' };
@@ -190,7 +216,7 @@ export async function toogleCatches(token: string, pigeon: Pigeon) {
 		try {
 			await handleCatching(token, pigeon);
 			revalidatePath('/', 'layout');
-			return { success: 'Palomo eliminado de embreo!' };
+			return { success: 'Palomo eliminado de hembreo!' };
 		} catch (error) {
 			console.error(error);
 			return { error: 'No se ha podido actualizar el palomo' };

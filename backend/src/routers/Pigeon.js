@@ -92,10 +92,15 @@ router.get('/pigeon/:pigeonId/captures/:year', auth, async (req, res) => {
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
-		if (!pigeon) res.status(404).send('El palomo no fue encontrado');
+		if (!pigeon) {
+			return res.status(404).send('El palomo no fue encontrado');
+		}
 
-		const captures = pigeon.captures.find((capture) => capture.year === parseInt(year));
-		res.status(200).send({ captures: captures });
+		const captures = pigeon.captures.filter(
+			(capture) => new Date(capture.date).getFullYear() === parseInt(year, 10)
+		);
+
+		res.status(200).send({ captures });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
@@ -160,6 +165,31 @@ router.delete('/pigeon/delete', auth, async (req, res) => {
 		await Pigeon.deleteOne({ ring: pigeonRing });
 
 		res.status(200).send({ message: 'Palomo eliminado exitosamente.' });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
+});
+
+router.delete('/pigeon/deleteCapture', auth, async (req, res) => {
+	const { pigeonId, captureId } = req.body;
+
+	try {
+		const pigeon = await Pigeon.findById(pigeonId);
+		if (!pigeon) {
+			return res.status(404).send('El palomo no fue encontrado');
+		}
+
+		const captureIndex = pigeon.captures.findIndex(
+			(capture) => capture._id.toString() === captureId
+		);
+		if (captureIndex === -1) {
+			return res.status(404).send('La captura no fue encontrada');
+		}
+
+		pigeon.captures.splice(captureIndex, 1);
+		await pigeon.save();
+
+		res.status(200).send({ message: 'Captura eliminada exitosamente' });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}

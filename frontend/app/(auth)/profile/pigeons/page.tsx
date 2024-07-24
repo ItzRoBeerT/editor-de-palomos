@@ -24,7 +24,7 @@ export default async function PigeonsPage() {
 					<p>Palomos: {total}</p>
 				</Card>
 				<Card>
-					<p>Palomos en embreo: {isCatchingTotal}</p>
+					<p>Palomos en hembreo: {isCatchingTotal}</p>
 				</Card>
 			</div>
 
