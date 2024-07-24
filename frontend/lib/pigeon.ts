@@ -148,6 +148,7 @@ export async function getAvailableYears(token: string) {
 	const data: data = await response.json();
 	return data.years;
 }
+
 export async function getCatchingPigeons(token: string, gender: 'male' | 'female') {
 	const response = await fetch(URI + 'user/getCatchingPigeons', {
 		method: 'POST',
@@ -166,5 +167,25 @@ export async function getCatchingPigeons(token: string, gender: 'male' | 'female
 		pigeons: Pigeon[];
 	}
 	const data: DataResponse = await response.json();
+	return data;
+}
+
+export async function getCaptures(token: string, pigeonId: string, year: number) {
+	const response = await fetch(URI + `pigeon/${pigeonId}/captures/${year}`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	}
+
+	interface Data {
+		captures: Capture[];
+	}
+	const data: Data = await response.json();
 	return data;
 }

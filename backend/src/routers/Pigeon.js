@@ -92,10 +92,18 @@ router.get('/pigeon/:pigeonId/captures/:year', auth, async (req, res) => {
 
 	try {
 		const pigeon = await Pigeon.findById(pigeonId);
-		if (!pigeon) res.status(404).send('El palomo no fue encontrado');
+		if (!pigeon) {
+			return res.status(404).send('El palomo no fue encontrado');
+		}
 
-		const captures = pigeon.captures.find((capture) => capture.year === parseInt(year));
-		res.status(200).send({ captures: captures });
+		const captures = pigeon.captures.filter(
+			(capture) => new Date(capture.date).getFullYear() === parseInt(year, 10)
+		);
+		if (captures.length === 0) {
+			return res.status(404).send('No se encontraron capturas para el año especificado');
+		}
+
+		res.status(200).send({ captures });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}

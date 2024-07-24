@@ -4,6 +4,7 @@ import Image from 'next/image';
 import moment from 'moment';
 import FormDelete from '@/components/forms/form-delete';
 import Switch from '@/components/ui/switch';
+import Link from 'next/link';
 
 export interface Props {
 	pigeon: Pigeon;
@@ -53,7 +54,14 @@ export default function ViewPigeon(props: Props) {
 					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
-			<Switch token={token} pigeon={pigeon}/>
+			<div className="flex gap-4">
+				<Switch token={token} pigeon={pigeon} />
+				{pigeon?.isCatching && (
+					<Link href={`${pigeon.ring}/catches`} className="rounded p-2 bg-blue-600">
+						Ver capturas
+					</Link>
+				)}
+			</div>
 			<FormDelete pigeon={pigeon} token={token} />
 		</div>
 	);
