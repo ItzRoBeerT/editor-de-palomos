@@ -23,7 +23,6 @@ export default function Catches(props: CatchesProps) {
 		const { captures } = await getCaptures(token, pigeonId, year);
 		setCaptures(captures);
 	}
-	console.log({ captures });
 
 	return (
 		<div>

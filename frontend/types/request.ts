@@ -19,7 +19,7 @@ export type Pigeon = {
 };
 
 export type Capture = {
-	_id: string;
+	_id?: string;
 	date: string;
 	owner: string;
 	feather: string;
