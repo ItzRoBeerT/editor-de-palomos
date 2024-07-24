@@ -20,8 +20,8 @@ export default function Catches(props: CatchesProps) {
 	}, [year]);
 
 	async function getPigeonCaptures() {
-		const { captures } = await getCaptures(token, pigeonId, year);
-		setCaptures(captures);
+		const { captures: newCaptures } = await getCaptures(token, pigeonId, year);
+		setCaptures(newCaptures);
 	}
 
 	return (
@@ -29,7 +29,11 @@ export default function Catches(props: CatchesProps) {
 			<div className="mb-4">
 				<YearSelect years={years} onSetYear={setYear} />
 			</div>
-			<Captures captures={captures} pigeonId={pigeonId} token={token} />
+			{captures.length > 0 ? (
+				<Captures captures={captures} pigeonId={pigeonId} token={token} />
+			) : (
+				<p>Todavaía no has añadido capturas</p>
+			)}
 		</div>
 	);
 }
