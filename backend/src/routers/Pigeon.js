@@ -23,11 +23,11 @@ router.post('/pigeon/add', auth, async (req, res) => {
 });
 
 router.post('/pigeon/get', auth, async (req, res) => {
-	const ring = req.body.ring;
+	const id = req.body.id;
 
 	try {
 		const pigeon = await Pigeon.findOne({
-			ring: ring,
+			_id: id,
 		}).exec();
 		res.status(200).send({ pigeon });
 	} catch (error) {
@@ -55,7 +55,7 @@ router.post('/pigeon/search', auth, async (req, res) => {
 router.patch('/pigeon/update', auth, async (req, res) => {
 	try {
 		const newPigeon = req.body.pigeon;
-		const pigeon = await Pigeon.findOne({ ring: newPigeon.ring });
+		const pigeon = await Pigeon.findOne({ _id: newPigeon._id });
 		if (!pigeon) return es.status(404).send({ error: 'No se encontró el palomo a modificar' });
 
 		Object.keys(newPigeon).map((update) => (pigeon[update] = newPigeon[update]));
@@ -133,8 +133,8 @@ router.get('/pigeon/years', auth, async (req, res) => {
 
 router.delete('/pigeon/delete', auth, async (req, res) => {
 	try {
-		const pigeonRing = req.body.ring;
-		const pigeon = await Pigeon.findOne({ ring: pigeonRing });
+		const id = req.body.id;
+		const pigeon = await Pigeon.findOne({ _id: id });
 
 		if (!pigeon) {
 			return res.status(404).send('No se ha encontrado el palomo a eliminar.');
@@ -162,7 +162,7 @@ router.delete('/pigeon/delete', auth, async (req, res) => {
 			return res.status(403).send('No tienes permiso para eliminar este palomo.');
 		}
 
-		await Pigeon.deleteOne({ ring: pigeonRing });
+		await Pigeon.deleteOne({ _id: id });
 
 		res.status(200).send({ message: 'Palomo eliminado exitosamente.' });
 	} catch (error) {

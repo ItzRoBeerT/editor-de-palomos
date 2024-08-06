@@ -21,7 +21,7 @@ export default function PigeonsDisplay(props: Props) {
 
 			{pigeons.length > 0 ? (
 				pigeons.map((pigeon) => (
-					<Card key={pigeon.ring} href={`pigeons/${pigeon.ring}`}>
+					<Card key={pigeon._id} href={`pigeons/${pigeon._id}`}>
 						<div className='flex justify-between items-center'>
 							<div>
 								{pigeon.name ? (

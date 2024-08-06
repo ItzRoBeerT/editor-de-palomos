@@ -38,14 +38,14 @@ export async function updatePigeon(pigeon: Pigeon, token: string) {
 	return response.json();
 }
 
-export async function getPigeon(token: string, ring: string) {
+export async function getPigeon(token: string, id: string) {
 	const response = await fetch(URI + 'pigeon/get', {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ ring }),
+		body: JSON.stringify({ id }),
 	});
 
 	if (!response.ok) {
@@ -78,14 +78,14 @@ export async function searchPigeon(token: string, searchValue: string) {
 	return pigeons;
 }
 
-export async function deletePigeon(token: string, ring: string) {
+export async function deletePigeon(token: string, id: string) {
 	const response = await fetch(URI + 'pigeon/delete', {
 		method: 'DELETE',
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ ring }),
+		body: JSON.stringify({ id }),
 	});
 
 	if (!response.ok) {

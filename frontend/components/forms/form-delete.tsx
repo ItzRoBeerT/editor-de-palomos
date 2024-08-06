@@ -14,7 +14,7 @@ export interface Props {
 
 export default function FormDelete(props: Props) {
 	const { token, pigeon } = props;
-	const [state, formAction] = useFormState(removePigeon.bind(null, token, pigeon.ring), {
+	const [state, formAction] = useFormState(removePigeon.bind(null, token, pigeon._id || ''), {
 		errors: {},
 	});
 	const [isOpen, setIsOpen] = useState(false);
