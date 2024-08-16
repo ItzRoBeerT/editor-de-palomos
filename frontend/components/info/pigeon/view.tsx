@@ -5,6 +5,8 @@ import moment from 'moment';
 import FormDelete from '@/components/forms/form-delete';
 import Switch from '@/components/ui/switch';
 import Link from 'next/link';
+import { getPigeon } from '@/lib/pigeon';
+import { useEffect, useState } from 'react';
 
 export interface Props {
 	pigeon: Pigeon;
@@ -16,10 +18,18 @@ export interface Props {
 export default function ViewPigeon(props: Props) {
 	const { pigeon, user, onHandleMode, token } = props;
 	const pigeonName = pigeon.name ? pigeon.name : pigeon.ring;
+	const [father, setFather] = useState<Pigeon>();
+	const [mother, setMother] = useState<Pigeon>();
 
 	function handleMode() {
 		onHandleMode();
 	}
+
+	useEffect(() => {
+		if (pigeon.father) getPigeon(token, pigeon.father || '').then((data) => setFather(data));
+		if (pigeon.mother) getPigeon(token, pigeon.mother || '').then((data) => setMother(data));
+	}, []);
+
 	return (
 		<div className="gap-4 grid">
 			<Card className="flex items-start text-center">
@@ -47,11 +57,21 @@ export default function ViewPigeon(props: Props) {
 				</p>
 			</Card>
 			<div className="grid grid-cols-2 gap-4">
-				<Card className="text-center" href={pigeon.father ? pigeon.father : ''}>
-					{pigeon.father ? <p>Padre: {pigeon.father}</p> : <p>Sin padre</p>}
+				<Card className="text-center relative" href={pigeon.father ? pigeon.father : ''}>
+					{pigeon.father && !father && (
+						<p className="text-xs bg-red-400 w-fit p-1 rounded absolute top-0 right-0">
+							Revisión
+						</p>
+					)}
+					{father?._id ? <p>Padre: {father?.name}</p> : <p>Sin padre</p>}
 				</Card>
-				<Card className="text-center" href={pigeon.mother ? pigeon.mother : ''}>
-					{pigeon.mother ? <p>Madre: {pigeon.mother}</p> : <p>Sin madre</p>}
+				<Card className="text-center relative" href={pigeon.mother ? pigeon.mother : ''}>
+					{pigeon.mother && !mother && (
+						<p className="text-xs bg-red-400 w-fit p-1 rounded absolute top-0 right-0">
+							Revisión
+						</p>
+					)}
+					{mother?._id ? <p>Madre: {mother?.name}</p> : <p>Sin madre</p>}
 				</Card>
 			</div>
 			<div className="flex gap-4">

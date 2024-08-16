@@ -68,7 +68,7 @@ export async function createPigeon(token: string, prevState: any, formData: Form
 	return { success: true };
 }
 
-export async function modifyPigeon(token: string, prevState: any, formData: FormData) {
+export async function modifyPigeon(token: string, id: string, prevState: any, formData: FormData) {
 	const name = formData.get('name');
 	const ring = formData.get('ring');
 	const feather = formData.get('feather');
@@ -107,15 +107,19 @@ export async function modifyPigeon(token: string, prevState: any, formData: Form
 		father: father as string,
 		gender: gender as string,
 		mother: mother as string,
+		_id: id,
 	};
 
 	try {
 		await updatePigeon(newPigeon, token);
 	} catch (error) {
 		console.error('Error adding pigeon:', error);
+		errors.response = "Error al actualizar el palomo"
 	}
 
 	revalidatePath('/', 'layout');
+
+	return { success: true };
 }
 
 export async function removePigeon(token: string, id: string) {

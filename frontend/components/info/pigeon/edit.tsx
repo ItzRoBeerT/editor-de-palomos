@@ -8,6 +8,7 @@ import { getFemalePigeons, getMalePigeons } from '@/functions/utils';
 import FormSubmit from '@/components/forms/form-submit';
 import { useFormState } from 'react-dom';
 import { modifyPigeon } from '@/actions/pigeon';
+import toast from 'react-hot-toast';
 
 export interface Props {
 	pigeon: Pigeon;
@@ -22,7 +23,9 @@ export default function EditPigeon(props: Props) {
 	const { pigeon, user, pigeons, token, onHandleMode } = props;
 	const pigeonName = pigeon.name ? pigeon.name : pigeon.ring;
 	const date = moment(pigeon.birthday).format('YYYY-MM-DD');
-	const [state, formAction] = useFormState(modifyPigeon.bind(null, token), { errors: {} });
+	const [state, formAction] = useFormState(modifyPigeon.bind(null, token, pigeon._id || ''), {
+		errors: {},
+	});
 	//#endregion
 
 	//#region FUNCTIONS
@@ -30,6 +33,13 @@ export default function EditPigeon(props: Props) {
 		onHandleMode();
 	}
 	//#endregion
+
+	if (state.errors?.response) {
+		toast.error('Error al actualizar el palomo', { duration: 2000 });
+	}
+	if (state.success) {
+		toast.success('Palomo acutalizado', { duration: 2000 });
+	}
 
 	return (
 		<form className="gap-4 grid" action={formAction}>
