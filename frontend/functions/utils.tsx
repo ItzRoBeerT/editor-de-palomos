@@ -5,12 +5,12 @@ import moment from 'moment';
 export function getMalePigeons(pigeons: Pigeon[]) {
 	return pigeons
 		.filter((pigeon) => pigeon.gender === 'male')
-		.map((pigeon) => ({ value: pigeon.ring, label: `${pigeon.name} - ${pigeon.ring}` }));
+		.map((pigeon) => ({ value: pigeon._id, label: `${pigeon.name} - ${pigeon.ring}` }));
 }
 export function getFemalePigeons(pigeons: Pigeon[]) {
 	return pigeons
 		.filter((pigeon) => pigeon.gender === 'female')
-		.map((pigeon) => ({ value: pigeon.ring, label: `${pigeon.name} - ${pigeon.ring}` }));
+		.map((pigeon) => ({ value: pigeon._id, label: `${pigeon.name} - ${pigeon.ring}` }));
 }
 
 export function getGenders() {

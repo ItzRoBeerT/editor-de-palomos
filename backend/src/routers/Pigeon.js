@@ -56,13 +56,16 @@ router.patch('/pigeon/update', auth, async (req, res) => {
 	try {
 		const newPigeon = req.body.pigeon;
 		const pigeon = await Pigeon.findOne({ _id: newPigeon._id });
-		if (!pigeon) return es.status(404).send({ error: 'No se encontró el palomo a modificar' });
+		
+		if (!pigeon) return res.status(404).send({ error: 'No se encontró el palomo a modificar' });
 
 		Object.keys(newPigeon).map((update) => (pigeon[update] = newPigeon[update]));
 		await pigeon.save();
 
 		res.status(200).send({ pigeon });
 	} catch (error) {
+		console.log(error);
+		
 		res.status(500).send({ error: error.message });
 	}
 });
