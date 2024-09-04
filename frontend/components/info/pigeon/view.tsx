@@ -29,7 +29,7 @@ export default function ViewPigeon(props: Props) {
 		if (pigeon.father) getPigeon(token, pigeon.father || '').then((data) => setFather(data));
 		if (pigeon.mother) getPigeon(token, pigeon.mother || '').then((data) => setMother(data));
 	}, []);
-
+	
 	return (
 		<div className="gap-4 grid">
 			<Card className="flex items-start text-center">
@@ -63,7 +63,7 @@ export default function ViewPigeon(props: Props) {
 							Revisión
 						</p>
 					)}
-					{father?._id ? <p>Padre: {father?.name}</p> : <p>Sin padre</p>}
+					{father?._id ? <p>Padre: {father?.name}</p> : <p>{pigeon.father}</p>}
 				</Card>
 				<Card className="text-center relative" href={pigeon.mother ? pigeon.mother : ''}>
 					{pigeon.mother && !mother && (
@@ -71,7 +71,7 @@ export default function ViewPigeon(props: Props) {
 							Revisión
 						</p>
 					)}
-					{mother?._id ? <p>Madre: {mother?.name}</p> : <p>Sin madre</p>}
+					{mother?._id ? <p>Madre: {mother?.name}</p> : <p>{pigeon.mother}</p>}
 				</Card>
 			</div>
 			<div className="flex gap-4">
