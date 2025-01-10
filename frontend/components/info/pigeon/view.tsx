@@ -77,7 +77,7 @@ export default function ViewPigeon(props: Props) {
 			<div className="flex gap-4">
 				<Switch token={token} pigeon={pigeon} />
 				{pigeon?.isCatching && (
-					<Link href={`${pigeon.ring}/catches`} className="rounded p-2 bg-blue-600">
+					<Link href={`${pigeon.ring}/catches`} className="rounded p-2 bg-blue-600 text-white">
 						Ver capturas
 					</Link>
 				)}

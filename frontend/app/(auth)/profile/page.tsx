@@ -19,28 +19,26 @@ export default async function ProfilePage() {
 	const user = await getUser(token);
 
 	return (
-		<main className="flex flex-col items-center min-h-screen">
-			<div className="container m-4">
-				<div className="max-w-3xl w-full mx-auto grid gap-4 grid-cols-1">
-					<Card>
-						<h1 className="text-4xl">Bienvenido, {user.name}!</h1>
-					</Card>
-					<div className="grid grid-cols-12 gap-4">
-						<div className="col-span-12 sm:col-span-4">
-							<Card href="/profile/pigeons">
-								<p>Mis palomos</p>
-							</Card>
-						</div>
-						<div className="col-span-12 sm:col-span-4">
-							<Card href="/profile/catches">
-								<p>Capturas</p>
-							</Card>
-						</div>
-						<div className="col-span-12 sm:col-span-4">
-							<Card href={'/profile/pigeon-form'}>
-								<p>Agregar nuevo palomo</p>
-							</Card>
-						</div>
+		<main className="min-h-screen">
+			<div className="grid gap-4 grid-cols-1">
+				<Card>
+					<h1 className="text-4xl">Bienvenido, {user.name}!</h1>
+				</Card>
+				<div className="grid grid-cols-12 gap-4">
+					<div className="col-span-12 sm:col-span-4">
+						<Card href="/profile/pigeons">
+							<p>Mis palomos</p>
+						</Card>
+					</div>
+					<div className="col-span-12 sm:col-span-4">
+						<Card href="/profile/catches">
+							<p>Capturas</p>
+						</Card>
+					</div>
+					<div className="col-span-12 sm:col-span-4">
+						<Card href={'/profile/pigeon-form'}>
+							<p>Agregar nuevo palomo</p>
+						</Card>
 					</div>
 				</div>
 			</div>

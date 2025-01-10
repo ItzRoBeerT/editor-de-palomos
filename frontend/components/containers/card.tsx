@@ -8,7 +8,7 @@ interface CardProps {
 
 export default function Card(props: CardProps) {
 	const { className, href, children } = props;
-	const baseClassName = 'bg-gray-800 p-4 rounded-2xl border border-gray-800';
+	const baseClassName = 'bg-gray-100 p-4 rounded-2xl border border-gray-100';
 	const combinedClassName = className ? `${baseClassName} ${className}` : baseClassName;
 
 	if (href) {

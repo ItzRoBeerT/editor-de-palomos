@@ -16,7 +16,7 @@ export default function YearSelect(props: YearSelect) {
 			Año:
 			<select
 				onChange={onChangeYear}
-				className="w-fit border text-white text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+				className="w-fit borde text-sm rounded-lg block p-2 bg-slate-200 "
 			>
 				{years.map((year) => (
 					<option key={year} value={year}>
