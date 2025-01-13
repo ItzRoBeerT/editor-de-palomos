@@ -56,12 +56,13 @@ export default function EditPigeon(props: Props) {
 			</Card>
 			<div className="grid grid-cols-2 gap-4">
 				<Card>
+					Género
 					<select
 						id="gender"
 						name="gender"
 						defaultValue={pigeon.gender}
 						required
-						className=" border  text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+						className="border text-sm rounded-lg block w-full p-2.5"
 					>
 						<option value="">Género</option>
 						<option value="male">Macho</option>
@@ -69,6 +70,7 @@ export default function EditPigeon(props: Props) {
 					</select>
 				</Card>
 				<Card>
+					Nombre
 					<FloatingInput
 						id="name"
 						name="name"
@@ -79,6 +81,7 @@ export default function EditPigeon(props: Props) {
 			</div>
 			<div className="grid grid-cols-2 gap-4">
 				<Card>
+					Pluma
 					<FloatingInput
 						id="feather"
 						name="feather"
@@ -88,6 +91,7 @@ export default function EditPigeon(props: Props) {
 					/>
 				</Card>
 				<Card>
+					Anilla
 					<FloatingInput
 						id="ring"
 						name="ring"
@@ -109,6 +113,7 @@ export default function EditPigeon(props: Props) {
 			</Card>
 			<div className="grid grid-cols-2 gap-4">
 				<Card className="text-center">
+					Nombre - Anilla
 					<CustomSelect
 						label="Nombre - Anilla"
 						options={getMalePigeons(pigeons)}
@@ -119,6 +124,7 @@ export default function EditPigeon(props: Props) {
 					/>
 				</Card>
 				<Card className="text-center">
+					Nombre - Anilla
 					<CustomSelect
 						label="Nombre - Anilla"
 						options={getFemalePigeons(pigeons)}

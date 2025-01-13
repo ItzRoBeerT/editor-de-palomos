@@ -41,15 +41,15 @@ export default function AddCatchButton(props: AddCatchButtonProps) {
 
 	return (
 		<>
-			<button onClick={onOpenModal} className="rounded bg-green-600 p-2">
+			<button onClick={onOpenModal} className="rounded bg-green-600 p-2 text-white">
 				Añadir captura
 			</button>
-			<Modal mode="dark" isOpen={isOpen} onClose={onCloseModal} title="Añadir nueva captura">
+			<Modal mode="light" isOpen={isOpen} onClose={onCloseModal} title="Añadir nueva captura">
 				<form className="grid gap-4" action={formAction}>
-					<FloatingInput type="text" label="Propietario" required name="owner" />
-					<FloatingInput type="text" label="Anilla" required name="ring" />
-					<FloatingInput type="text" label="Pluma" required name="feather" />
-					<FloatingInput type="date" label="Fecha" required name="date" />
+					<FloatingInput type="text" label="Propietario" placeholder='Propietario' required name="owner" />
+					<FloatingInput type="text" label="Anilla" placeholder='Anilla' required name="ring" />
+					<FloatingInput type="text" label="Pluma" placeholder='Pluma' required name="feather" />
+					<FloatingInput type="date" label="Fecha" placeholder='Fecha' required name="date" />
 					<FormSubmit />
 				</form>
 			</Modal>

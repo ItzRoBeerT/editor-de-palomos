@@ -24,6 +24,9 @@ export default function Catches(props: CatchesProps) {
 		setCaptures(newCaptures);
 	}
 
+	console.log({captures});
+	
+
 	return (
 		<div>
 			<div className="mb-4">

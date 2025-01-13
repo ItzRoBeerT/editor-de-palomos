@@ -11,13 +11,13 @@ export default function GenderSelect(props: GenderSelectProps) {
 		<div>
 			<button
 				onClick={() => onGenderChange('male')}
-				className={`rounded-l p-2 ${gender === 'male' ? 'bg-blue-600' : 'bg-gray-600'}`}
+				className={`rounded-l p-2 ${gender === 'male' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
 			>
 				Macho
 			</button>
 			<button
 				onClick={() => onGenderChange('female')}
-				className={`rounded-r p-2 ${gender === 'female' ? 'bg-blue-600' : 'bg-gray-600'}`}
+				className={`rounded-r p-2 ${gender === 'female' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
 			>
 				Hembra
 			</button>

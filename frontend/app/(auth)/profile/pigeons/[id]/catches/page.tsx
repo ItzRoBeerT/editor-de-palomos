@@ -15,7 +15,7 @@ export default async function CatchesPage(props: any) {
 			<Card className="mb-4">
 				<h1 className="text-4xl text-center">Mis capturas</h1>
 			</Card>
-			<Catches token={token} years={years} pigeonId={pigeon._id || ''} />
+			<Catches token={token} years={years} pigeonId={pigeon?._id || ''} />
 		</main>
 	);
 }

@@ -38,15 +38,15 @@ export default function PigeonForm(props: Props) {
 		<Card>
 			<form className="space-y-6 p-4" action={formAction}>
 				<div>
-					<FloatingInput label="Nombre" type="text" id="name" name="name" />
+					<FloatingInput label="Nombre" type="text" id="name" name="name" placeholder='nombre'/>
 				</div>
 
 				<div>
-					<FloatingInput label="Anilla" type="text" id="ring" name="ring" required />
+					<FloatingInput label="Anilla" type="text" id="ring" name="ring" placeholder='Anilla' required />
 				</div>
 
 				<div>
-					<FloatingInput label="Pluma" type="text" name="feather" id="feather" required />
+					<FloatingInput label="Pluma" type="text" name="feather" id="feather" placeholder='Pluma' required />
 				</div>
 
 				<CustomSelect
@@ -59,6 +59,7 @@ export default function PigeonForm(props: Props) {
 				/>
 
 				<div>
+					<label>Fecha de nacimiento</label>
 					<FloatingInput
 						type="date"
 						id="birthday"
@@ -69,6 +70,7 @@ export default function PigeonForm(props: Props) {
 				</div>
 
 				<div>
+				<label>Nombre - Anilla</label>
 					<CustomSelect
 						options={malePigeons}
 						id="father"
@@ -79,6 +81,7 @@ export default function PigeonForm(props: Props) {
 				</div>
 
 				<div>
+				<label>Nombre - Anilla</label>
 					<CustomSelect
 						options={femalePigeons}
 						id="mother"
