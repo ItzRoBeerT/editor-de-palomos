@@ -18,7 +18,7 @@ export default function Pigeons(props: PigeonsProps) {
 				<p>Nombre: {pigeon.name ? pigeon.name : pigeon.feather}</p>
 				<p>Capturas: {pigeon.captures?.length}</p>
 			</div>
-			<AddCatchButton pigeonId={pigeon._id || ''} token={token} />
+			<AddCatchButton pigeonId={pigeon?._id || ''} token={token} />
 		</Card>
 	));
 }

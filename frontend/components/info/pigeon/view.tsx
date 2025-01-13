@@ -29,6 +29,9 @@ export default function ViewPigeon(props: Props) {
 		if (pigeon.father) getPigeon(token, pigeon.father || '').then((data) => setFather(data));
 		if (pigeon.mother) getPigeon(token, pigeon.mother || '').then((data) => setMother(data));
 	}, []);
+
+	console.log({ father, mother });
+	
 	
 	return (
 		<div className="gap-4 grid">
