@@ -28,10 +28,7 @@ export default function ViewPigeon(props: Props) {
 	useEffect(() => {
 		if (pigeon.father) getPigeon(token, pigeon.father || '').then((data) => setFather(data));
 		if (pigeon.mother) getPigeon(token, pigeon.mother || '').then((data) => setMother(data));
-	}, []);
-
-	console.log({ father, mother });
-	
+	}, []);	
 	
 	return (
 		<div className="gap-4 grid">
@@ -80,7 +77,7 @@ export default function ViewPigeon(props: Props) {
 			<div className="flex gap-4">
 				<Switch token={token} pigeon={pigeon} />
 				{pigeon?.isCatching && (
-					<Link href={`${pigeon.ring}/catches`} className="rounded p-2 bg-blue-600 text-white">
+					<Link href={`${pigeon._id}/catches`} className="rounded p-2 bg-blue-600 text-white">
 						Ver capturas
 					</Link>
 				)}
