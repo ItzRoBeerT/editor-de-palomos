@@ -1,7 +1,6 @@
 import PigeonInfo from '@/components/info/pigeon/index';
 import { getPigeon } from '@/lib/pigeon';
 import { getPigeons, getUser } from '@/lib/user';
-import { log } from 'console';
 import { cookies } from 'next/headers';
 
 interface Props {

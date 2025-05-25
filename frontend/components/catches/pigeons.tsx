@@ -2,6 +2,7 @@
 import Card from '@/components/containers/card';
 import { Pigeon } from '@/types/request';
 import AddCatchButton from './add-catch-button';
+import Link from 'next/link';
 
 interface PigeonsProps {
 	pigeons: Pigeon[];
@@ -18,7 +19,10 @@ export default function Pigeons(props: PigeonsProps) {
 				<p>Nombre: {pigeon.name ? pigeon.name : pigeon.feather}</p>
 				<p>Capturas: {pigeon.captures?.length}</p>
 			</div>
-			<AddCatchButton pigeonId={pigeon?._id || ''} token={token} />
+			<div className='flex flex-col gap-2 items-center'>
+				<AddCatchButton pigeonId={pigeon?._id || ''} token={token} />
+				<Link className='bg-blue-500 text-white p-2 rounded' href={`pigeons/${pigeon._id}/catches`}>Ver capturas</Link>
+			</div>
 		</Card>
 	));
 }
